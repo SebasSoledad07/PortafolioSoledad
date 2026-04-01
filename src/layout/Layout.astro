@@ -1,0 +1,94 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { 
+	title, 
+	description = "Portafolio profesional de Sebastian Soledad - Ingeniero de Sistemas especializado en Arquitectura de Software y FullStack Development." 
+} = Astro.props;
+
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+		
+		<title>{title}</title>
+	</head>
+	<body class="bg-carbon text-smoke antialiased selection:bg-cyanElectric selection:text-carbon">
+		
+		<div class="fixed inset-0 z-[-1] opacity-[0.03] pointer-events-none" 
+			 style="background-image: radial-gradient(#00E5FF 0.5px, transparent 0.5px); background-size: 30px 30px;">
+		</div>
+
+		<div class="fixed top-0 right-0 w-[500px] h-[500px] bg-cyanElectric/5 blur-[120px] z-[-1] pointer-events-none rounded-full"></div>
+
+		<slot />
+
+		<style is:global>
+			/* Optimizaciones de renderizado y scroll */
+			:root {
+				--accent: #00E5FF;
+			}
+			
+			html {
+				font-family: 'Montserrat', sans-serif;
+			}
+
+			code {
+				font-family: 'Fira Code', monospace;
+			}
+
+			/* Personalización del Scrollbar (Minimalista) */
+			::-webkit-scrollbar {
+				width: 6px;
+			}
+			::-webkit-scrollbar-track {
+				background: #121212;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #333;
+				border-radius: 10px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: var(--accent);
+			}
+
+			/* Animación sutil de entrada para secciones */
+			.reveal {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: all 0.8s ease-out;
+			}
+			.reveal.active {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		</style>
+
+		<script>
+			// Observador para animaciones al hacer scroll (UX)
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('active');
+					}
+				});
+			});
+
+			document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+		</script>
+	</body>
+</html>
