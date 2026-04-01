@@ -9,7 +9,9 @@ export default {
         smoke: "#F5F5F5",
       },
       fontFamily: {
+        // Montserrat para títulos y cuerpo base
         sans: ["Montserrat", "sans-serif"],
+        // Fira Code para detalles técnicos y tags
         mono: ["Fira Code", "monospace"],
       },
     },

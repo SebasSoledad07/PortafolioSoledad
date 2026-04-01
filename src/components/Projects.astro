@@ -1,0 +1,69 @@
+---
+const projects = [
+  {
+    title: "NailTrack Pro",
+    category: "FULLSTACK SYSTEM",
+    description: "Sistema integral de reservas y gestión para manicuristas. Arquitectura desacoplada con procesamiento de citas en tiempo real.",
+    stack: ["Java", "Spring Boot", "Angular", "PostgreSQL"],
+    github: "#"
+  },
+  {
+    title: "RentFlow Manager",
+    category: "PROPERTY MANAGEMENT",
+    description: "Plataforma de gestión de propiedades en alquiler. Optimización de flujos de pago y control de contratos de arrendamiento.",
+    stack: ["Spring Boot", "React", "MySQL"],
+    github: "#"
+  },
+  {
+    title: "EduCore System",
+    category: "ACADEMIC MANAGEMENT",
+    description: "Sistema de gestión académica enfocado en la experiencia del estudiante. Implementación Serverless con Supabase.",
+    stack: ["React", "Supabase", "Tailwind"],
+    github: "#"
+  }
+];
+---
+
+<section id="projects" class="py-24 bg-carbon">
+  <div class="container mx-auto px-6">
+    
+    <div class="mb-16">
+      <h2 class="font-mono text-cyan-electric text-xs uppercase tracking-[0.5em] mb-4">// Portfolio_Nodes</h2>
+      <h3 class="text-4xl md:text-5xl font-black text-smoke tracking-tight">
+        Proyectos <span class="text-cyan-electric">Destacados</span>
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        /* Cambiado bg-[#1A1A1A] por bg-white/5 para un look más moderno y sutil */
+        <div class="group bg-white/5 border border-white/10 p-8 flex flex-col justify-between hover:border-cyan-electric/40 transition-all duration-500 shadow-2xl">
+          <div>
+            <span class="font-mono text-[10px] text-cyan-electric tracking-widest uppercase">{project.category}</span>
+            <h4 class="text-2xl font-bold text-smoke mt-2 mb-4 group-hover:text-cyan-electric transition-colors uppercase">
+              {project.title}
+            </h4>
+            <p class="text-smoke/60 text-sm leading-relaxed mb-8 font-light italic">
+              {project.description}
+            </p>
+            
+            <div class="flex flex-wrap gap-2 mb-8">
+              {project.stack.map((tech) => (
+                <span class="font-mono text-[10px] bg-carbon text-smoke/50 border border-white/5 px-2 py-1">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <div class="pt-6 border-t border-white/5 flex justify-between items-center">
+             <a href={project.github} class="font-mono text-[11px] text-cyan-electric hover:text-smoke transition-colors uppercase tracking-widest">
+                View Code
+             </a>
+             <div class="w-2 h-2 rounded-full bg-cyan-electric animate-pulse shadow-[0_0_10px_var(--color-cyan-electric)]"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

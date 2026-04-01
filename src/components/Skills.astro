@@ -27,33 +27,33 @@ const skillCategories = [
 ];
 ---
 
-<section id="skills" class="py-24 relative overflow-hidden">
+<section id="skills" class="py-24 relative overflow-hidden bg-carbon">
   <div class="container mx-auto px-6 relative z-10">
     
-    <div class="mb-16 reveal">
-      <h2 class="text-xs font-mono text-cyanElectric uppercase tracking-[0.5em] mb-4">
+    <div class="mb-16">
+      <h2 class="text-xs font-mono text-cyan-electric uppercase tracking-[0.5em] mb-4">
         // Technical_Stack
       </h2>
       <h3 class="text-4xl md:text-5xl font-black text-smoke tracking-tight">
-        Infraestructura & <span class="text-cyanElectric">Tecnologías</span>
+        Infraestructura & <span class="text-cyan-electric">Tecnologías</span>
       </h3>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {skillCategories.map((category) => (
-        <div class="group p-8 bg-smoke/[0.02] border border-smoke/10 hover:border-cyanElectric/40 transition-all duration-500 reveal">
+      {skillCategories.map((category, index) => (
+        <div class="group p-8 bg-smoke/5 border border-smoke/10 hover:border-cyan-electric/40 transition-all duration-500">
           <div class="flex items-start justify-between mb-6">
-            <div class="p-3 bg-cyanElectric/5 rounded-lg border border-cyanElectric/10 group-hover:bg-cyanElectric/20 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyanElectric" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="p-3 bg-cyan-electric/5 rounded-lg border border-cyan-electric/10 group-hover:bg-cyan-electric/20 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyan-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={category.icon} />
               </svg>
             </div>
-            <span class="font-mono text-[10px] text-smoke/20 group-hover:text-cyanElectric/40 transition-colors uppercase tracking-widest">
-              Module_0{skillCategories.indexOf(category) + 1}
+            <span class="font-mono text-[10px] text-smoke/20 group-hover:text-cyan-electric/40 transition-colors uppercase tracking-widest">
+              0{index + 1}
             </span>
           </div>
 
-          <h4 class="text-2xl font-bold text-smoke mb-2 group-hover:text-cyanElectric transition-colors">
+          <h4 class="text-2xl font-bold text-smoke mb-2 group-hover:text-cyan-electric transition-colors uppercase">
             {category.title}
           </h4>
           <p class="text-smoke/50 text-sm mb-8 font-light italic">
@@ -62,7 +62,7 @@ const skillCategories = [
 
           <div class="flex flex-wrap gap-3">
             {category.skills.map((skill) => (
-              <span class="font-mono text-xs text-smoke/70 border border-smoke/10 px-3 py-1 bg-smoke/[0.02] hover:text-cyanElectric hover:border-cyanElectric/30 transition-all cursor-default">
+              <span class="font-mono text-xs text-smoke/70 border border-smoke/10 px-3 py-1 bg-smoke/5 hover:text-cyan-electric hover:border-cyan-electric/30 transition-all cursor-default">
                 {skill}
               </span>
             ))}
@@ -74,7 +74,7 @@ const skillCategories = [
 </section>
 
 <style>
-  /* Efecto de resplandor sutil al pasar el mouse por la sección */
+  /* Ajuste del gradiente para usar la variable de v4 */
   #skills::before {
     content: '';
     position: absolute;
@@ -82,7 +82,8 @@ const skillCategories = [
     left: 50%;
     width: 140%;
     height: 140%;
-    background: radial-gradient(circle at center, rgba(0, 229, 255, 0.03) 0%, transparent 70%);
+    background: radial-gradient(circle at center, var(--color-cyan-electric) 0.03, transparent 70%);
+    opacity: 0.05;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }

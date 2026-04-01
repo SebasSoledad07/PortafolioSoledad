@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@theme {
+  /* Definición de Colores */
+  --color-carbon: #121212;
+  --color-cyan-electric: #00e5ff;
+  --color-smoke: #f5f5f5;
+
+  /* Definición de Fuentes */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: var(--color-carbon);
+    color: var(--color-smoke);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}

@@ -1,0 +1,61 @@
+---
+const experiences = [
+
+  {
+    date: "2026",
+    role: "FullStack Developer",
+    company: "Soledad.dev (Proyecto Personal)",
+    description: "Desarrollo de aplicaciones web con tecnologías modernas y arquitectura de alto nivel.",
+    highlights: ["Análisis de requisitos", "Diseño de base de datos", "Implementación de API REST", "Despliegue en la nube","Diseño de interfaces responsivas"]
+  },
+  {
+    date: "2021 - 2026",
+    role: "Ingeniero de Sistemas en Formación",
+    company: "Universidad Francisco de Paula Santander",
+    description: "Desarrollo de sólidas bases en algoritmos, estructuras de datos y principios de ingeniería de software.",
+    highlights: ["Java Enterprise", "Spring Boot", "Arquitectura Limpia"]
+  }
+];
+---
+
+<section id="experience" class="py-24 relative">
+  <div class="container mx-auto px-6">
+    
+    <div class="mb-16">
+      <h2 class="font-mono text-cyanElectric text-xs uppercase tracking-[0.5em] mb-4">// Milestones</h2>
+      <h3 class="text-4xl md:text-5xl font-black text-smoke">Trayectoria <span class="text-cyanElectric">Profesional</span></h3>
+    </div>
+
+    <div class="relative border-l border-white/10 ml-4 md:ml-8 pl-8 space-y-12">
+      {experiences.map((exp) => (
+        <div class="relative">
+          <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-carbon border-2 border-cyanElectric shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+          
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4">
+            <div>
+              <h4 class="text-xl font-bold text-smoke transition-colors">
+                {exp.role}
+              </h4>
+              <p class="text-cyanElectric/70 font-mono text-sm">{exp.company}</p>
+            </div>
+            <span class="font-mono text-[11px] text-smoke/30 mt-2 md:mt-0 uppercase tracking-widest bg-white/5 px-3 py-1">
+              {exp.date}
+            </span>
+          </div>
+
+          <p class="text-smoke/60 text-sm max-w-3xl leading-relaxed mb-6 font-light">
+            {exp.description}
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {exp.highlights.map((item) => (
+              <span class="text-[10px] font-mono text-smoke/40 border border-white/5 px-2 py-0.5 bg-white/[0.02]">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

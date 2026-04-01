@@ -1,33 +1,32 @@
 ---
 ---
-
-<section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
+<section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-carbon">
   
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyanElectric/5 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-electric/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-  <div class="container mx-auto px-6 relative z-10 text-center reveal">
+  <div class="container mx-auto px-6 relative z-10 text-center">
     
     <div class="inline-block mb-6">
-      <span class="font-mono text-xs md:text-sm text-cyanElectric bg-cyanElectric/10 px-4 py-1.5 rounded-full border border-cyanElectric/20 tracking-[0.2em] uppercase">
-        &lt; Systems_Architect // FullStack &gt;
+      <span class="font-mono text-xs md:text-sm text-cyan-electric bg-cyan-electric/10 px-4 py-1.5 rounded-full border border-cyan-electric/20 tracking-[0.2em] uppercase">
+        &lt; Ingeniero de Sistemas // FullStack Developer &gt;
       </span>
     </div>
 
-    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-smoke tracking-tighter mb-6 leading-none">
-      Soledad<span class="text-cyanElectric">.dev</span>
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-smoke tracking-tighter mb-6 leading-none uppercase">
+      Soledad<span class="text-cyan-electric">.dev</span>
     </h1>
 
     <p class="max-w-2xl mx-auto text-lg md:text-xl text-smoke/70 font-light leading-relaxed mb-10">
       Construyendo <span class="text-smoke font-medium">soluciones escalables</span> y 
-      <span class="text-cyanElectric font-mono text-base md:text-lg italic">arquitectura de alto nivel</span> 
-      desde el backend.
+      <span class="text-cyan-electric font-mono text-base md:text-lg italic">arquitectura de alto nivel</span> 
+      para la web.
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
       <a 
-        href="/tu-cv.pdf" 
+        href="public/SEBASTIAN_SOLEDAD_CV.pdf" 
         download
-        class="group relative px-8 py-4 bg-cyanElectric text-carbon font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] overflow-hidden"
+        class="group relative px-8 py-4 bg-cyan-electric text-carbon font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] overflow-hidden"
       >
         <span class="relative z-10">Descargar CV</span>
         <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-20"></div>
@@ -35,26 +34,25 @@
 
       <a 
         href="#projects" 
-        class="font-mono text-xs uppercase tracking-[0.3em] text-smoke/50 hover:text-cyanElectric transition-colors duration-300 flex items-center gap-2"
+        class="font-mono text-xs uppercase tracking-[0.3em] text-smoke/50 hover:text-cyan-electric transition-colors duration-300 flex items-center gap-2"
       >
-        Explorar Proyectos <span class="text-cyanElectric">_</span>
+        Explorar Proyectos <span class="blink-cursor text-cyan-electric"></span>
       </a>
     </div>
 
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20">
-      <div class="w-px h-12 bg-gradient-to-b from-cyanElectric to-transparent"></div>
+      <div class="w-px h-12 bg-gradient-to-b from-cyan-electric to-transparent"></div>
     </div>
   </div>
 </section>
 
 <style>
-  /* Animación personalizada para el cursor "_" en el link de proyectos */
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
   
-  .text-cyanElectric span {
+  .blink-cursor {
     animation: blink 1s infinite;
   }
 </style>

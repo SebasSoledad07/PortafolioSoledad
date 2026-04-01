@@ -20,14 +20,13 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 		
-		<title>{title}</title>
+<title>{title}</title>
 	</head>
-	<body class="bg-carbon text-smoke antialiased selection:bg-cyanElectric selection:text-carbon">
+	<body class="bg-carbon text-smoke">
 		
 		<div class="fixed inset-0 z-[-1] opacity-[0.03] pointer-events-none" 
 			 style="background-image: radial-gradient(#00E5FF 0.5px, transparent 0.5px); background-size: 30px 30px;">
@@ -37,46 +36,7 @@ import '../styles/global.css';
 
 		<slot />
 
-		<style is:global>
-			/* Optimizaciones de renderizado y scroll */
-			:root {
-				--accent: #00E5FF;
-			}
-			
-			html {
-				font-family: 'Montserrat', sans-serif;
-			}
-
-			code {
-				font-family: 'Fira Code', monospace;
-			}
-
-			/* Personalización del Scrollbar (Minimalista) */
-			::-webkit-scrollbar {
-				width: 6px;
-			}
-			::-webkit-scrollbar-track {
-				background: #121212;
-			}
-			::-webkit-scrollbar-thumb {
-				background: #333;
-				border-radius: 10px;
-			}
-			::-webkit-scrollbar-thumb:hover {
-				background: var(--accent);
-			}
-
-			/* Animación sutil de entrada para secciones */
-			.reveal {
-				opacity: 0;
-				transform: translateY(20px);
-				transition: all 0.8s ease-out;
-			}
-			.reveal.active {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		</style>
+	
 
 		<script>
 			// Observador para animaciones al hacer scroll (UX)
