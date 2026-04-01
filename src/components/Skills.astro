@@ -1,0 +1,89 @@
+---
+const skillCategories = [
+  {
+    title: "Core Backend",
+    description: "Lógica de negocio y servicios robustos.",
+    skills: ["Java", "Spring Boot", "Microservicios", "REST APIs"],
+    icon: "M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"
+  },
+  {
+    title: "Frontend & UI",
+    description: "Interfaces reactivas y experiencia de usuario.",
+    skills: ["React", "Angular", "Astro", "Tailwind CSS"],
+    icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+  },
+  {
+    title: "Data Strategy",
+    description: "Persistencia y modelado de datos.",
+    skills: ["PostgreSQL", "Supabase", "SQL Server", "Redis"],
+    icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+  },
+  {
+    title: "DevOps & Cloud",
+    description: "Despliegue escalable y automatización.",
+    skills: ["Docker", "Cloud Run", "Git / GitHub", "CI/CD"],
+    icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+  }
+];
+---
+
+<section id="skills" class="py-24 relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    
+    <div class="mb-16 reveal">
+      <h2 class="text-xs font-mono text-cyanElectric uppercase tracking-[0.5em] mb-4">
+        // Technical_Stack
+      </h2>
+      <h3 class="text-4xl md:text-5xl font-black text-smoke tracking-tight">
+        Infraestructura & <span class="text-cyanElectric">Tecnologías</span>
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {skillCategories.map((category) => (
+        <div class="group p-8 bg-smoke/[0.02] border border-smoke/10 hover:border-cyanElectric/40 transition-all duration-500 reveal">
+          <div class="flex items-start justify-between mb-6">
+            <div class="p-3 bg-cyanElectric/5 rounded-lg border border-cyanElectric/10 group-hover:bg-cyanElectric/20 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyanElectric" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={category.icon} />
+              </svg>
+            </div>
+            <span class="font-mono text-[10px] text-smoke/20 group-hover:text-cyanElectric/40 transition-colors uppercase tracking-widest">
+              Module_0{skillCategories.indexOf(category) + 1}
+            </span>
+          </div>
+
+          <h4 class="text-2xl font-bold text-smoke mb-2 group-hover:text-cyanElectric transition-colors">
+            {category.title}
+          </h4>
+          <p class="text-smoke/50 text-sm mb-8 font-light italic">
+            {category.description}
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            {category.skills.map((skill) => (
+              <span class="font-mono text-xs text-smoke/70 border border-smoke/10 px-3 py-1 bg-smoke/[0.02] hover:text-cyanElectric hover:border-cyanElectric/30 transition-all cursor-default">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Efecto de resplandor sutil al pasar el mouse por la sección */
+  #skills::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle at center, rgba(0, 229, 255, 0.03) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+</style>
