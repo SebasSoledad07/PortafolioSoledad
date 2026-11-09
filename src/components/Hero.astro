@@ -1,39 +1,72 @@
 ---
+const stack = [
+  "Java",
+  "Spring Boot",
+  "React",
+  "Angular",
+  "PostgreSQL",
+  "Docker",
+];
 ---
-<section class="relative min-h-screen flex items-center justify-center pt-20 px-4 overflow-hidden bg-bg">
-  <div class="text-center w-full max-w-4xl mx-auto">
-    <div class="inline-block mb-6">
-      <span class="font-mono text-xs md:text-sm text-accent bg-accent/10 px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-accent/20 tracking-widest uppercase">
-        &lt; Ingeniero de Sistemas // FullStack Developer &gt;
-      </span>
-    </div>
 
-    <h1 class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-ink tracking-tighter mb-6 leading-[0.9]">
-      Soledad<span class="text-accent">.dev</span>
-    </h1>
+<section
+  id="inicio"
+  class="relative flex min-h-[100svh] items-center overflow-hidden bg-bg px-6 pb-16 pt-28"
+>
+  <div class="container-page">
+    <div class="mx-auto max-w-4xl text-center">
+      <p
+        class="inline-flex items-center gap-2 rounded-full border border-success/25 bg-success/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-ink-body"
+      >
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75"
+          ></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-success"
+          ></span>
+        </span>
+        Disponible para proyectos · Cúcuta, COL
+      </p>
 
-    <p class="max-w-xl mx-auto text-sm md:text-lg text-ink-body font-light mb-10 px-2">
-      Construyendo soluciones <span class="text-ink font-medium">escalables</span> y 
-      arquitectura de alto nivel.
-    </p>
+      <h1
+        class="mt-8 font-black text-ink"
+        style="font-size: clamp(3rem, 12vw, 9.5rem); line-height: 0.88;"
+      >
+        Soledad<span class="text-accent">.dev</span>
+      </h1>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-      <a href="/SEBASTIAN_SOLEDAD_CV.pdf" class="w-full sm:w-auto px-8 py-4 bg-accent text-accent-ink font-bold uppercase text-xs tracking-widest hover:scale-105 transition-transform">
-        Descargar CV
-      </a>
-      <a href="#projects" class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-meta hover:text-accent gap-2">
-        Proyectos <span></span>
-      </a>
+      <p
+        class="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ink-body md:text-lg"
+      >
+        Ingeniero de sistemas que construye aplicaciones
+        <strong class="font-semibold text-ink"
+          >fullstack con Java, Spring Boot y React</strong
+        >: reservas, alquileres y gestión académica, de la base de datos a la
+        interfaz.
+      </p>
+
+      <div
+        class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      >
+        <a href="#proyectos" class="btn btn-primary w-full sm:w-auto">
+          Ver proyectos ↗
+        </a>
+        <a
+          href="/SEBASTIAN_SOLEDAD_CV.pdf"
+          class="btn btn-outline w-full sm:w-auto"
+        >
+          Descargar CV
+        </a>
+      </div>
+
+      <div class="mt-14 border-t border-line-soft pt-6">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
+          Stack diario
+        </p>
+        <ul class="mt-4 flex flex-wrap justify-center gap-2">
+          {stack.map((tech) => <li class="chip">{tech}</li>)}
+        </ul>
+      </div>
     </div>
   </div>
 </section>
-<style>
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  
-  .blink-cursor {
-    animation: blink 1s infinite;
-  }
-</style>

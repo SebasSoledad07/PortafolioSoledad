@@ -1,51 +1,176 @@
 ---
 const navItems = [
-  { name: 'Inicio', href: '#home' },
-  { name: 'Experiencia', href: '#experience' },
-  { name: 'Habilidades', href: '#skills' },
-  { name: 'Proyectos', href: '#projects' },
-  { name: 'Contacto', href: '#contact' },
+  { label: "Experiencia", href: "#experiencia" },
+  { label: "Stack", href: "#stack" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Contacto", href: "#contacto" },
 ];
 ---
-<nav class="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur-md border-b border-line-soft">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="flex justify-between h-16 items-center">
-      <a href="/" class="text-xl font-bold text-ink font-display">
+
+<nav
+  id="main-nav"
+  aria-label="Principal"
+  class="fixed top-0 z-50 w-full border-b border-line-soft bg-bg/80 backdrop-blur-md transition-shadow duration-300"
+>
+  <div class="container-page">
+    <div class="flex h-16 items-center justify-between gap-4">
+      <a
+        href="/"
+        class="font-display text-lg font-black uppercase tracking-tight text-ink"
+      >
         Soledad<span class="text-accent">.dev</span>
       </a>
 
-      <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
-        {['Inicio', 'Experiencia', 'Habilidades', 'Proyectos'].map((item) => (
-          <a href={`#${item.toLowerCase()}`} class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav hover:text-accent transition-colors">
-            // {item}
-          </a>
-        ))}
-      </div>
+      <ul class="hidden items-center gap-6 md:flex lg:gap-8">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                data-nav-link
+                class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
+              >
+                // {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
 
-      <a href="/SEBASTIAN_SOLEDAD_CV.pdf" class="inline-flex min-h-11 items-center rounded font-mono text-xs border border-accent px-3 py-1.5 md:px-4 md:py-2 text-accent hover:bg-accent hover:text-accent-ink transition-all">
-        DESCARGAR CV
+      <a
+        href="/SEBASTIAN_SOLEDAD_CV.pdf"
+        class="btn btn-outline btn-card hidden md:inline-flex"
+      >
+        Descargar CV
       </a>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink-nav transition-colors hover:border-accent hover:text-accent md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Abrir menú"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-line-soft bg-bg md:hidden"
+  >
+    <div class="container-page py-4">
+      <ul class="flex flex-col gap-1">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                data-nav-link
+                class="flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
+              >
+                // {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="mt-2">
+          <a
+            href="/SEBASTIAN_SOLEDAD_CV.pdf"
+            class="btn btn-outline btn-card w-full"
+          >
+            Descargar CV
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 
 <script>
-  // Simple logic for scroll effect and mobile toggle
-  const nav = document.getElementById('main-nav');
-  const toggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const nav = document.getElementById("main-nav");
+  const toggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav?.classList.add('h-16');
-      nav?.classList.remove('h-20');
-    } else {
-      nav?.classList.add('h-20');
-      nav?.classList.remove('h-16');
-    }
+  const setMenu = (open: boolean) => {
+    if (!toggle || !mobileMenu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    mobileMenu.classList.toggle("hidden", !open);
+  };
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setMenu(!isOpen);
   });
 
-  toggle?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  mobileMenu
+    ?.querySelectorAll<HTMLAnchorElement>("a")
+    .forEach((link) => link.addEventListener("click", () => setMenu(false)));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenu(false);
   });
+
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("#main-nav a[data-nav-link]"),
+  ];
+  const sections = [
+    ...document.querySelectorAll<HTMLElement>("main section[id]"),
+  ];
+
+  const setActive = (activeId: string | undefined) => {
+    links.forEach((link) => {
+      const isActive = activeId
+        ? link.getAttribute("href") === `#${activeId}`
+        : false;
+      link.classList.toggle("text-accent", isActive);
+      link.classList.toggle("text-ink-nav", !isActive);
+      if (isActive) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  if (sections.length > 0 && "IntersectionObserver" in window) {
+    const visible = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        });
+        const active = sections.find((section) => visible.has(section.id));
+        setActive(active?.id);
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      nav?.classList.toggle(
+        "shadow-[0_8px_24px_rgba(0,0,0,0.35)]",
+        window.scrollY > 8,
+      );
+    },
+    { passive: true },
+  );
 </script>

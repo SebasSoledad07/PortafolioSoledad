@@ -55,16 +55,12 @@ La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src
 
 ## Estado actual y bugs conocidos
 
-- **Navegación rota**: el loop de `Navbar.astro` genera `#inicio`, `#experiencia`,
-  `#habilidades`, `#proyectos`, pero las secciones usan `#experience`, `#skills`, `#projects`,
-  `#contact`; el Hero no tiene `id`. `navItems` está definido y sin usar.
-- El `<script>` de `Navbar.astro` busca `#main-nav`, `#menu-toggle` y `#mobile-menu`, que no
-  existen en el markup; no hay menú móvil real.
+- **Navegación y Hero resueltos en la Fase 4**: ids españoles (`#inicio`, `#experiencia`, `#stack`,
+  `#proyectos`, `#contacto`), menú móvil real con `aria-expanded` y resaltado por
+  `IntersectionObserver`. Queda pendiente el enlace `SOBRE MÍ` hasta que exista `About.astro`.
 - Contacto ya vive en `Contact.astro` (`#contacto`) con correo, LinkedIn y GitHub reales; el
   footer quedó separado y solo tiene enlaces de texto. Falta el número de WhatsApp: la constante
   `whatsappNumber` de `Contact.astro` está vacía y el botón no se renderiza hasta rellenarla.
-- Hero: el CTA primario es "Descargar CV" y "Proyectos" parece texto suelto; la v2 invierte la
-  jerarquía (proyectos primario, CV secundario) y añade pill de disponibilidad y franja de stack.
 - Proyectos ya se renderizan desde `src/data/projects.ts` con `ProjectCard.astro` y enlaces
   reales (sin `#`). Faltan capturas/video reales, demos desplegadas, métricas de resultado y un
   repositorio público para EduCore; no inventar ninguno de esos datos.
@@ -77,11 +73,12 @@ La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src
 Orden por dependencias. Las fases 2 y 3 son las de prioridad 🔴 en la spec y pueden adelantarse
 tras la fase 1.
 
-> Estado: **Fases 1, 2 y 3 implementadas**. Fase 1: tokens, tipografía, contraste, foco, reduced
-> motion y clases base. Fase 2: tarjeta de proyecto data-driven y enlaces reales; quedan
+> Estado: **Fases 1, 2, 3 y 4 implementadas**. Fase 1: tokens, tipografía, contraste, foco,
+> reduced motion y clases base. Fase 2: tarjeta de proyecto data-driven y enlaces reales; quedan
 > bloqueados capturas, demos y métricas reales. Fase 3: sección `#contacto` y footer separado;
-> queda pendiente el número real de WhatsApp. Lighthouse local: Accessibility 100, Best
-> Practices 100, SEO 100. Siguiente: fase 4.
+> queda pendiente el número real de WhatsApp. Fase 4: navegación con ids reales, menú móvil y
+> Hero rediseñado; `SOBRE MÍ` queda pendiente de `About.astro`. Lighthouse local: Accessibility
+> 100, Best Practices 100, SEO 100. Siguiente: fase 5.
 
 ### Fase 1 — Base visual y accesibilidad (§1)
 
@@ -122,6 +119,10 @@ tras la fase 1.
 - Hero: pill de disponibilidad, subtítulo específico, `VER PROYECTOS` primario + `DESCARGAR CV`
   outline, franja "STACK DIARIO" con 6 chips. Usar `clamp()` y `overflow-wrap`.
 - Aceptación: a 1440×900 título, subtítulo y ambos botones visibles sin scroll; a 360px sin desborde.
+
+> Implementada. `Navbar.astro` usa `navItems` con `#experiencia`, `#stack`, `#proyectos` y
+> `#contacto`; el Hero es `#inicio`. Los eyebrows de las secciones ya coinciden con el menú.
+> `SOBRE MÍ` se añadirá cuando exista `About.astro` (Fase 5) para no dejar un anchor huérfano.
 
 ### Fase 5 — Sobre mí y Experiencia (§3–4)
 
