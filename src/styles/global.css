@@ -151,6 +151,16 @@
     font-size: 0.75rem;
   }
 
+  .btn-card-outline {
+    border: 1px solid #3a3a42;
+    color: var(--color-ink);
+  }
+
+  .btn-card-outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
   /* Chip v2 §1.4 */
   .chip {
     display: inline-flex;

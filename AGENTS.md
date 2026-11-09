@@ -25,15 +25,16 @@ npm.cmd run preview
 ```
 src/layout/Layout.astro        # <head>, fuentes, fondo global, script .reveal (ojo: singular "layout")
 src/pages/index.astro           # única página; compone las secciones
-src/components/                 # Navbar, Hero, Experience, Skills, Projects, Footer
+src/components/                 # Navbar, Hero, Experience, Skills, Projects, ProjectCard, Footer
+src/data/projects.ts            # datos tipados de proyectos (demo/repo/imagen opcionales)
 src/styles/global.css           # tokens Tailwind v4 + base
 public/SEBASTIAN_SOLEDAD_CV.pdf # nombre real del CV
 docs/portafolio-specs.md        # especificación v2 (checklist en §11)
 ```
 
-La estructura propuesta en `docs` (§10) todavía no existe: no hay `src/data/`, `src/i18n/`,
-`ProjectCard.astro`, `About.astro` ni `Contact.astro`. `src/layout/` es singular; no lo renombres
-sin motivo (la spec propone `src/layouts/Base.astro`, pero hoy el archivo real es `Layout.astro`).
+La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src/i18n/`, `About.astro`
+y `Contact.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spec propone
+`src/layouts/Base.astro`, pero hoy el archivo real es `Layout.astro`).
 
 ## Tailwind v4: trampas que rompen el diseño en silencio
 
@@ -50,7 +51,7 @@ sin motivo (la spec propone `src/layouts/Base.astro`, pero hoy el archivo real e
   Fuentes: Montserrat (display), Inter (cuerpo) y JetBrains Mono (etiquetas), cargadas desde
   Google Fonts en `Layout.astro`.
 - Clases base reutilizables en `global.css`: `container-page`, `section`, `eyebrow`, `btn`,
-  `btn-primary`, `btn-outline`, `btn-card`, `chip`, `card`, `card-hover`.
+  `btn-primary`, `btn-outline`, `btn-card`, `btn-card-outline`, `chip`, `card`, `card-hover`.
 
 ## Estado actual y bugs conocidos
 
@@ -62,10 +63,11 @@ sin motivo (la spec propone `src/layouts/Base.astro`, pero hoy el archivo real e
 - `#contact` está en `<footer>`; la v2 exige una sección `Contact` propia y un footer separado.
 - Hero: el CTA primario es "Descargar CV" y "Proyectos" parece texto suelto; la v2 invierte la
   jerarquía (proyectos primario, CV secundario) y añade pill de disponibilidad y franja de stack.
-- `Projects.astro` tiene `github: "#"` y no tiene captura, métrica, demo ni botón de código;
-  publicar así incumple la §6.
-- Datos de experiencia, stack y proyectos están inline en cada componente; la v2 pide moverlos
-  a `src/data/*` (§10) para que añadir un proyecto sea un registro, no copiar HTML.
+- Proyectos ya se renderizan desde `src/data/projects.ts` con `ProjectCard.astro` y enlaces
+  reales (sin `#`). Faltan capturas/video reales, demos desplegadas, métricas de resultado y un
+  repositorio público para EduCore; no inventar ninguno de esos datos.
+- Experiencia y stack siguen inline en sus componentes; proyectos ya está en `src/data/`. La v2
+  pide mover también esos datos a `src/data/*` (§10).
 - No hay `About`, `Contact`, sitemap, i18n, JSON-LD, OG image ni analítica.
 
 ## Guía por fases
@@ -73,8 +75,10 @@ sin motivo (la spec propone `src/layouts/Base.astro`, pero hoy el archivo real e
 Orden por dependencias. Las fases 2 y 3 son las de prioridad 🔴 en la spec y pueden adelantarse
 tras la fase 1.
 
-> Estado: **Fase 1 completada** (tokens, tipografía, contraste, foco, reduced motion y clases
-> base). Lighthouse local: Accessibility 100, Best Practices 100, SEO 100. Siguiente: fase 2.
+> Estado: **Fases 1 y 2 implementadas**. Fase 1: tokens, tipografía, contraste, foco, reduced
+> motion y clases base. Fase 2: tarjeta de proyecto data-driven y enlaces reales; quedan
+> bloqueados capturas, demos y métricas reales. Lighthouse local: Accessibility 100, Best
+> Practices 100, SEO 100. Siguiente: fase 3.
 
 ### Fase 1 — Base visual y accesibilidad (§1)
 

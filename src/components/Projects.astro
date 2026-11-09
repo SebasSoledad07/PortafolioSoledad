@@ -1,65 +1,19 @@
 ---
-const projects = [
-  {
-    title: "NailTrack Pro",
-    category: "FULLSTACK SYSTEM",
-    description: "Sistema integral de reservas y gestión para manicuristas. Arquitectura desacoplada con procesamiento de citas en tiempo real.",
-    stack: ["Java", "Spring Boot", "Angular", "PostgreSQL"],
-    github: "#"
-  },
-  {
-    title: "RentFlow Manager",
-    category: "PROPERTY MANAGEMENT",
-    description: "Plataforma de gestión de propiedades en alquiler. Optimización de flujos de pago y control de contratos de arrendamiento.",
-    stack: ["Spring Boot", "React", "MySQL"],
-    github: "#"
-  },
-  {
-    title: "EduCore System",
-    category: "ACADEMIC MANAGEMENT",
-    description: "Sistema de gestión académica enfocado en la experiencia del estudiante. Implementación Serverless con Supabase.",
-    stack: ["React", "Supabase", "Tailwind"],
-    github: "#"
-  }
-];
+import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
 ---
 
 <section id="projects" class="section bg-bg">
   <div class="container-page">
     
     <div class="mb-12 md:mb-16 text-center md:text-left">
-      <h2 class="font-mono text-accent text-xs uppercase tracking-[0.4em] mb-2">// Portfolio</h2>
+      <h2 class="font-mono text-accent text-xs uppercase tracking-[0.4em] mb-2">// Portafolio</h2>
       <h3 class="text-3xl md:text-5xl font-black text-ink">Proyectos <span class="text-accent">Destacados</span></h3>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {projects.map((project) => (
-        <div class="card card-hover group p-8 flex flex-col justify-between hover:border-accent/40">
-          <div>
-            <span class="font-mono text-xs text-accent tracking-widest uppercase">{project.category}</span>
-            <h4 class="text-2xl font-bold text-ink mt-2 mb-4 group-hover:text-accent transition-colors uppercase">
-              {project.title}
-            </h4>
-            <p class="text-ink-body text-sm leading-relaxed mb-8">
-              {project.description}
-            </p>
-            
-            <div class="flex flex-wrap gap-2 mb-8">
-              {project.stack.map((tech) => (
-                <span class="chip">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-          
-          <div class="pt-6 border-t border-line flex justify-between items-center">
-             <a href={project.github} class="inline-flex min-h-11 items-center font-mono text-xs text-accent hover:text-ink transition-colors uppercase tracking-widest">
-                Código
-             </a>
-             <div class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--color-accent)]"></div>
-          </div>
-        </div>
+        <ProjectCard project={project} />
       ))}
     </div>
   </div>
