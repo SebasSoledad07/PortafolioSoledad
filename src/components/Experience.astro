@@ -18,38 +18,38 @@ const experiences = [
 ];
 ---
 
-<section id="experience" class="py-24 relative">
-  <div class="container mx-auto px-6">
+<section id="experience" class="section relative">
+  <div class="container-page">
     
     <div class="mb-16">
-      <h2 class="font-mono text-cyanElectric text-xs uppercase tracking-[0.5em] mb-4">// Milestones</h2>
-      <h3 class="text-4xl md:text-5xl font-black text-smoke">Trayectoria <span class="text-cyanElectric">Profesional</span></h3>
+      <h2 class="font-mono text-xs text-accent uppercase tracking-[0.5em] mb-4">// Milestones</h2>
+      <h3 class="text-4xl md:text-5xl font-black text-ink">Trayectoria <span class="text-accent">Profesional</span></h3>
     </div>
 
-    <div class="relative border-l border-white/10 ml-4 md:ml-8 pl-8 space-y-12">
+    <div class="relative border-l border-line ml-4 md:ml-8 pl-8 space-y-12">
       {experiences.map((exp) => (
         <div class="relative">
-          <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-carbon border-2 border-cyanElectric shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+          <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-bg border-2 border-accent shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
           
           <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4">
             <div>
-              <h4 class="text-xl font-bold text-smoke transition-colors">
+              <h4 class="text-xl font-bold text-ink transition-colors">
                 {exp.role}
               </h4>
-              <p class="text-cyanElectric/70 font-mono text-sm">{exp.company}</p>
+              <p class="text-accent font-mono text-sm">{exp.company}</p>
             </div>
-            <span class="font-mono text-[11px] text-smoke/30 mt-2 md:mt-0 uppercase tracking-widest bg-white/5 px-3 py-1">
+            <span class="font-mono text-xs text-ink-meta mt-2 md:mt-0 uppercase tracking-widest bg-surface-2 px-3 py-1">
               {exp.date}
             </span>
           </div>
 
-          <p class="text-smoke/60 text-sm max-w-3xl leading-relaxed mb-6 font-light">
+          <p class="text-ink-body text-sm max-w-3xl leading-relaxed mb-6">
             {exp.description}
           </p>
 
           <div class="flex flex-wrap gap-2">
             {exp.highlights.map((item) => (
-              <span class="text-[10px] font-mono text-smoke/40 border border-white/5 px-2 py-0.5 bg-white/[0.02]">
+              <span class="chip">
                 {item}
               </span>
             ))}

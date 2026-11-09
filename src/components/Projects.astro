@@ -24,41 +24,40 @@ const projects = [
 ];
 ---
 
-<section id="projects" class="py-16 md:py-24 bg-carbon">
-  <div class="container mx-auto px-4 md:px-6">
+<section id="projects" class="section bg-bg">
+  <div class="container-page">
     
     <div class="mb-12 md:mb-16 text-center md:text-left">
-      <h2 class="font-mono text-cyan-electric text-[10px] md:text-xs uppercase tracking-[0.4em] mb-2">// Portfolio</h2>
-      <h3 class="text-3xl md:text-5xl font-black text-smoke">Proyectos <span class="text-cyan-electric">Destacados</span></h3>
+      <h2 class="font-mono text-accent text-xs uppercase tracking-[0.4em] mb-2">// Portfolio</h2>
+      <h3 class="text-3xl md:text-5xl font-black text-ink">Proyectos <span class="text-accent">Destacados</span></h3>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {projects.map((project) => (
-        /* Cambiado bg-[#1A1A1A] por bg-white/5 para un look más moderno y sutil */
-        <div class="group bg-white/5 border border-white/10 p-8 flex flex-col justify-between hover:border-cyan-electric/40 transition-all duration-500 shadow-2xl">
+        <div class="card card-hover group p-8 flex flex-col justify-between hover:border-accent/40">
           <div>
-            <span class="font-mono text-[10px] text-cyan-electric tracking-widest uppercase">{project.category}</span>
-            <h4 class="text-2xl font-bold text-smoke mt-2 mb-4 group-hover:text-cyan-electric transition-colors uppercase">
+            <span class="font-mono text-xs text-accent tracking-widest uppercase">{project.category}</span>
+            <h4 class="text-2xl font-bold text-ink mt-2 mb-4 group-hover:text-accent transition-colors uppercase">
               {project.title}
             </h4>
-            <p class="text-smoke/60 text-sm leading-relaxed mb-8 font-light italic">
+            <p class="text-ink-body text-sm leading-relaxed mb-8">
               {project.description}
             </p>
             
             <div class="flex flex-wrap gap-2 mb-8">
               {project.stack.map((tech) => (
-                <span class="font-mono text-[10px] bg-carbon text-smoke/50 border border-white/5 px-2 py-1">
+                <span class="chip">
                   {tech}
                 </span>
               ))}
             </div>
           </div>
           
-          <div class="pt-6 border-t border-white/5 flex justify-between items-center">
-             <a href={project.github} class="font-mono text-[11px] text-cyan-electric hover:text-smoke transition-colors uppercase tracking-widest">
-                View Code
+          <div class="pt-6 border-t border-line flex justify-between items-center">
+             <a href={project.github} class="inline-flex min-h-11 items-center font-mono text-xs text-accent hover:text-ink transition-colors uppercase tracking-widest">
+                Código
              </a>
-             <div class="w-2 h-2 rounded-full bg-cyan-electric animate-pulse shadow-[0_0_10px_var(--color-cyan-electric)]"></div>
+             <div class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--color-accent)]"></div>
           </div>
         </div>
       ))}

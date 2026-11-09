@@ -7,23 +7,23 @@ const navItems = [
   { name: 'Contacto', href: '#contact' },
 ];
 ---
-<nav class="fixed top-0 w-full z-50 bg-carbon/80 backdrop-blur-md border-b border-white/5">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav class="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur-md border-b border-line-soft">
+  <div class="max-w-[1200px] mx-auto px-6">
     <div class="flex justify-between h-16 items-center">
-      <a href="/" class="text-xl font-bold text-smoke">
-        Soledad<span class="text-cyan-electric">.dev</span>
+      <a href="/" class="text-xl font-bold text-ink font-display">
+        Soledad<span class="text-accent">.dev</span>
       </a>
 
       <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
         {['Inicio', 'Experiencia', 'Habilidades', 'Proyectos'].map((item) => (
-          <a href={`#${item.toLowerCase()}`} class="font-mono text-[10px] uppercase tracking-widest text-smoke/60 hover:text-cyan-electric transition-colors">
+          <a href={`#${item.toLowerCase()}`} class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav hover:text-accent transition-colors">
             // {item}
           </a>
         ))}
       </div>
 
-      <a href="/SEBASTIAN_SOLEDAD_CV.pdf" class="text-[9px] md:text-[10px] font-mono border border-cyan-electric px-3 py-1.5 md:px-4 md:py-2 text-cyan-electric hover:bg-cyan-electric hover:text-carbon transition-all">
-        GET_CV
+      <a href="/SEBASTIAN_SOLEDAD_CV.pdf" class="inline-flex min-h-11 items-center rounded font-mono text-xs border border-accent px-3 py-1.5 md:px-4 md:py-2 text-accent hover:bg-accent hover:text-accent-ink transition-all">
+        DESCARGAR CV
       </a>
     </div>
   </div>

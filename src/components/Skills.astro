@@ -27,42 +27,42 @@ const skillCategories = [
 ];
 ---
 
-<section id="skills" class="py-24 relative overflow-hidden bg-carbon">
-  <div class="container mx-auto px-6 relative z-10">
+<section id="skills" class="section relative overflow-hidden bg-bg">
+  <div class="container-page relative z-10">
     
     <div class="mb-16">
-      <h2 class="text-xs font-mono text-cyan-electric uppercase tracking-[0.5em] mb-4">
+      <h2 class="text-xs font-mono text-accent uppercase tracking-[0.5em] mb-4">
         // Technical_Stack
       </h2>
-      <h3 class="text-4xl md:text-5xl font-black text-smoke tracking-tight">
-        Infraestructura & <span class="text-cyan-electric">Tecnologías</span>
+      <h3 class="text-4xl md:text-5xl font-black text-ink tracking-tight">
+        Infraestructura & <span class="text-accent">Tecnologías</span>
       </h3>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {skillCategories.map((category, index) => (
-        <div class="group p-8 bg-smoke/5 border border-smoke/10 hover:border-cyan-electric/40 transition-all duration-500">
+        <div class="card card-hover group p-8 hover:border-accent/40">
           <div class="flex items-start justify-between mb-6">
-            <div class="p-3 bg-cyan-electric/5 rounded-lg border border-cyan-electric/10 group-hover:bg-cyan-electric/20 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyan-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="p-3 bg-accent/5 rounded-lg border border-accent/10 group-hover:bg-accent/20 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={category.icon} />
               </svg>
             </div>
-            <span class="font-mono text-[10px] text-smoke/20 group-hover:text-cyan-electric/40 transition-colors uppercase tracking-widest">
+            <span class="font-mono text-xs text-ink-meta group-hover:text-accent transition-colors uppercase tracking-widest">
               0{index + 1}
             </span>
           </div>
 
-          <h4 class="text-2xl font-bold text-smoke mb-2 group-hover:text-cyan-electric transition-colors uppercase">
+          <h4 class="text-2xl font-bold text-ink mb-2 group-hover:text-accent transition-colors uppercase">
             {category.title}
           </h4>
-          <p class="text-smoke/50 text-sm mb-8 font-light italic">
+          <p class="text-ink-body text-sm mb-8">
             {category.description}
           </p>
 
           <div class="flex flex-wrap gap-3">
             {category.skills.map((skill) => (
-              <span class="font-mono text-xs text-smoke/70 border border-smoke/10 px-3 py-1 bg-smoke/5 hover:text-cyan-electric hover:border-cyan-electric/30 transition-all cursor-default">
+              <span class="chip cursor-default hover:text-accent hover:border-accent/30 transition-all">
                 {skill}
               </span>
             ))}
@@ -82,7 +82,7 @@ const skillCategories = [
     left: 50%;
     width: 140%;
     height: 140%;
-    background: radial-gradient(circle at center, var(--color-cyan-electric) 0.03, transparent 70%);
+    background: radial-gradient(circle at center, var(--color-accent) 0.03, transparent 70%);
     opacity: 0.05;
     transform: translate(-50%, -50%);
     pointer-events: none;

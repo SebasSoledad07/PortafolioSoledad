@@ -20,20 +20,20 @@ const socials = [
 ];
 ---
 
-<footer id="contact" class="border-t border-white/5 bg-carbon py-12 relative overflow-hidden">
-  <div class="container mx-auto px-6">
+<footer id="contact" class="border-t border-line-soft bg-bg py-12 relative overflow-hidden">
+  <div class="container-page">
     <div class="flex flex-col md:flex-row justify-between items-center gap-8">
       
       <div class="text-center md:text-left">
-        <h2 class="text-xl font-black text-smoke mb-2">
-          Soledad<span class="text-cyanElectric">.dev</span>
+        <h2 class="text-xl font-black text-ink mb-2 font-display">
+          Soledad<span class="text-accent">.dev</span>
         </h2>
         <div class="flex items-center justify-center md:justify-start gap-2">
           <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyanElectric opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyanElectric"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
           </span>
-          <p class="font-mono text-[10px] text-smoke/40 uppercase tracking-widest">
+          <p class="font-mono text-xs text-ink-meta uppercase tracking-widest">
             Operational // Cúcuta, COL
           </p>
         </div>
@@ -45,7 +45,7 @@ const socials = [
             href={social.url} 
             target="_blank" 
             aria-label={social.name}
-            class="group p-3 border border-white/5 hover:border-cyanElectric/50 hover:bg-cyanElectric/5 transition-all duration-300"
+            class="group p-3 border border-line hover:border-accent/50 hover:bg-accent/5 transition-all duration-300"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -57,7 +57,7 @@ const socials = [
               stroke-width="1.5" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
-              class="text-smoke/60 group-hover:text-cyanElectric transition-colors"
+              class="text-ink-nav group-hover:text-accent transition-colors"
             >
               <path d={social.icon}></path>
             </svg>
@@ -66,10 +66,10 @@ const socials = [
       </div>
 
       <div class="text-center md:text-right">
-        <p class="font-mono text-[10px] text-smoke/30 uppercase tracking-widest mb-1">
+        <p class="font-mono text-xs text-ink-meta uppercase tracking-widest mb-1">
           &copy; {currentYear} Sebastian Soledad
         </p>
-        <p class="font-mono text-[9px] text-cyanElectric/40">
+        <p class="font-mono text-xs text-ink-meta">
           Hecho con Astro + Tailwind CSS
         </p>
       </div>
@@ -77,5 +77,5 @@ const socials = [
     </div>
   </div>
 
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-cyanElectric/20 to-transparent"></div>
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
 </footer>

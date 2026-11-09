@@ -10,7 +10,7 @@ import Footer from '../components/Footer.astro';
 
 <Layout title="Soledad.dev | FullStack & Architecture">
 	<Navbar />
-	<main class="max-w-6xl mx-auto px-4">
+	<main class="max-w-[1200px] mx-auto px-6">
 		<Hero />
 		<Experience />
 		<Skills />
@@ -18,9 +18,3 @@ import Footer from '../components/Footer.astro';
 	</main>
 	<Footer />
 </Layout>
-<style is:global>
-	/* Optimizamos el scroll entre secciones */
-	html {
-		scroll-padding-top: 80px;
-	}
-</style>
