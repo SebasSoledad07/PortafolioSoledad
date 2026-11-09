@@ -25,15 +25,15 @@ npm.cmd run preview
 ```
 src/layout/Layout.astro        # <head>, fuentes, fondo global, script .reveal (ojo: singular "layout")
 src/pages/index.astro           # única página; compone las secciones
-src/components/                 # Navbar, Hero, Experience, Skills, Projects, ProjectCard, Footer
+src/components/                 # Navbar, Hero, Experience, Skills, Projects, ProjectCard, Contact, Footer
 src/data/projects.ts            # datos tipados de proyectos (demo/repo/imagen opcionales)
 src/styles/global.css           # tokens Tailwind v4 + base
 public/SEBASTIAN_SOLEDAD_CV.pdf # nombre real del CV
 docs/portafolio-specs.md        # especificación v2 (checklist en §11)
 ```
 
-La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src/i18n/`, `About.astro`
-y `Contact.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spec propone
+La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src/i18n/` y
+`About.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spec propone
 `src/layouts/Base.astro`, pero hoy el archivo real es `Layout.astro`).
 
 ## Tailwind v4: trampas que rompen el diseño en silencio
@@ -60,7 +60,9 @@ y `Contact.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spe
   `#contact`; el Hero no tiene `id`. `navItems` está definido y sin usar.
 - El `<script>` de `Navbar.astro` busca `#main-nav`, `#menu-toggle` y `#mobile-menu`, que no
   existen en el markup; no hay menú móvil real.
-- `#contact` está en `<footer>`; la v2 exige una sección `Contact` propia y un footer separado.
+- Contacto ya vive en `Contact.astro` (`#contacto`) con correo, LinkedIn y GitHub reales; el
+  footer quedó separado y solo tiene enlaces de texto. Falta el número de WhatsApp: la constante
+  `whatsappNumber` de `Contact.astro` está vacía y el botón no se renderiza hasta rellenarla.
 - Hero: el CTA primario es "Descargar CV" y "Proyectos" parece texto suelto; la v2 invierte la
   jerarquía (proyectos primario, CV secundario) y añade pill de disponibilidad y franja de stack.
 - Proyectos ya se renderizan desde `src/data/projects.ts` con `ProjectCard.astro` y enlaces
@@ -68,17 +70,18 @@ y `Contact.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spe
   repositorio público para EduCore; no inventar ninguno de esos datos.
 - Experiencia y stack siguen inline en sus componentes; proyectos ya está en `src/data/`. La v2
   pide mover también esos datos a `src/data/*` (§10).
-- No hay `About`, `Contact`, sitemap, i18n, JSON-LD, OG image ni analítica.
+- No hay `About`, sitemap, i18n, JSON-LD, OG image ni analítica.
 
 ## Guía por fases
 
 Orden por dependencias. Las fases 2 y 3 son las de prioridad 🔴 en la spec y pueden adelantarse
 tras la fase 1.
 
-> Estado: **Fases 1 y 2 implementadas**. Fase 1: tokens, tipografía, contraste, foco, reduced
+> Estado: **Fases 1, 2 y 3 implementadas**. Fase 1: tokens, tipografía, contraste, foco, reduced
 > motion y clases base. Fase 2: tarjeta de proyecto data-driven y enlaces reales; quedan
-> bloqueados capturas, demos y métricas reales. Lighthouse local: Accessibility 100, Best
-> Practices 100, SEO 100. Siguiente: fase 3.
+> bloqueados capturas, demos y métricas reales. Fase 3: sección `#contacto` y footer separado;
+> queda pendiente el número real de WhatsApp. Lighthouse local: Accessibility 100, Best
+> Practices 100, SEO 100. Siguiente: fase 4.
 
 ### Fase 1 — Base visual y accesibilidad (§1)
 
@@ -106,6 +109,9 @@ tras la fase 1.
   mensaje), LinkedIn y GitHub; botones que abran la acción correcta.
 - Footer separado con enlaces **con texto** (no solo íconos), copyright y "Hecho con Astro + Tailwind".
 - Aceptación: correo copiable a simple vista y cada botón funciona.
+
+> Implementada en `Contact.astro` + `Footer.astro`. Correo, LinkedIn, GitHub e Instagram usan
+> URLs reales. El botón de WhatsApp está condicionado a `whatsappNumber`; falta el número real.
 
 ### Fase 4 — Navegación y Hero (§2)
 

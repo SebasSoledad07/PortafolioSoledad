@@ -3,79 +3,75 @@ const currentYear = new Date().getFullYear();
 
 const socials = [
   {
-    name: "LinkedIn",
+    label: "LinkedIn",
     url: "https://www.linkedin.com/in/sebastiansoledad/",
-    icon: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"
   },
   {
-    name: "GitHub",
+    label: "GitHub",
     url: "https://github.com/SebasSoledad07",
-    icon: "M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
   },
   {
-    name: "Instagram",
+    label: "Instagram",
     url: "https://www.instagram.com/soledads.dev/",
-    icon: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm9 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-4 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"
-  }
+  },
 ];
 ---
 
-<footer id="contact" class="border-t border-line-soft bg-bg py-12 relative overflow-hidden">
+<footer class="border-t border-line-soft bg-bg py-12">
   <div class="container-page">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-      
+    <div
+      class="flex flex-col items-center gap-8 md:flex-row md:items-center md:justify-between"
+    >
       <div class="text-center md:text-left">
-        <h2 class="text-xl font-black text-ink mb-2 font-display">
+        <p
+          class="font-display text-lg font-black uppercase tracking-tight text-ink"
+        >
           Soledad<span class="text-accent">.dev</span>
-        </h2>
-        <div class="flex items-center justify-center md:justify-start gap-2">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+        </p>
+        <div
+          class="mt-3 flex items-center justify-center gap-2 md:justify-start"
+        >
+          <span class="relative flex h-2 w-2" aria-hidden="true">
+            <span
+              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75"
+            ></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-success"
+            ></span>
           </span>
-          <p class="font-mono text-xs text-ink-meta uppercase tracking-widest">
+          <p
+            class="font-mono text-xs uppercase tracking-widest text-ink-nav"
+          >
             Operational // Cúcuta, COL
           </p>
         </div>
       </div>
 
-      <div class="flex gap-6">
-        {socials.map((social) => (
-          <a 
-            href={social.url} 
-            target="_blank" 
-            aria-label={social.name}
-            class="group p-3 border border-line hover:border-accent/50 hover:bg-accent/5 transition-all duration-300"
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="1.5" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="text-ink-nav group-hover:text-accent transition-colors"
+      <nav
+        aria-label="Redes sociales"
+        class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1"
+      >
+        {
+          socials.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
             >
-              <path d={social.icon}></path>
-            </svg>
-          </a>
-        ))}
-      </div>
+              {social.label}
+            </a>
+          ))
+        }
+      </nav>
 
       <div class="text-center md:text-right">
-        <p class="font-mono text-xs text-ink-meta uppercase tracking-widest mb-1">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-nav">
           &copy; {currentYear} Sebastian Soledad
         </p>
-        <p class="font-mono text-xs text-ink-meta">
+        <p class="mt-1 font-mono text-xs text-ink-nav">
           Hecho con Astro + Tailwind CSS
         </p>
       </div>
-
     </div>
   </div>
-
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
 </footer>
