@@ -25,15 +25,16 @@ npm.cmd run preview
 ```
 src/layout/Layout.astro        # <head>, fuentes, fondo global, script .reveal (ojo: singular "layout")
 src/pages/index.astro           # única página; compone las secciones
-src/components/                 # Navbar, Hero, Experience, Skills, Projects, ProjectCard, Contact, Footer
+src/components/                 # Navbar, Hero, About, Experience, Skills, Projects, ProjectCard, Contact, Footer
 src/data/projects.ts            # datos tipados de proyectos (demo/repo/imagen opcionales)
+src/data/tech-icons.ts          # rutas SVG (Simple Icons) de los logos del stack
 src/styles/global.css           # tokens Tailwind v4 + base
 public/SEBASTIAN_SOLEDAD_CV.pdf # nombre real del CV
 docs/portafolio-specs.md        # especificación v2 (checklist en §11)
 ```
 
-La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src/i18n/` y
-`About.astro`. `src/layout/` es singular; no lo renombres sin motivo (la spec propone
+La estructura propuesta en `docs` (§10) todavía no está completa: falta `src/i18n/`.
+`src/layout/` es singular; no lo renombres sin motivo (la spec propone
 `src/layouts/Base.astro`, pero hoy el archivo real es `Layout.astro`).
 
 ## Tailwind v4: trampas que rompen el diseño en silencio
@@ -55,30 +56,39 @@ La estructura propuesta en `docs` (§10) todavía no está completa: faltan `src
 
 ## Estado actual y bugs conocidos
 
-- **Navegación y Hero resueltos en la Fase 4**: ids españoles (`#inicio`, `#experiencia`, `#stack`,
-  `#proyectos`, `#contacto`), menú móvil real con `aria-expanded` y resaltado por
-  `IntersectionObserver`. Queda pendiente el enlace `SOBRE MÍ` hasta que exista `About.astro`.
+- **Navegación y Hero resueltos en la Fase 4**: ids españoles (`#inicio`, `#sobre-mi`,
+  `#experiencia`, `#stack`, `#proyectos`, `#contacto`), menú móvil real con `aria-expanded` y
+  resaltado por `IntersectionObserver`.
+- `About.astro` (`#sobre-mi`) existe y está enlazado desde el menú. La foto real de `[TU FOTO]`
+  aún no está: `About.astro` detecta automáticamente cualquier imagen en `src/assets/about/`
+  (4:5, WebP/AVIF) y, mientras no exista, muestra un monograma neutro `SS`.
+- El segundo párrafo de About se redactó con datos reales del CV (arquitectura hexagonal, Docker,
+  los tres proyectos). Si el autor quiere contar su motivación personal, debe editar ese texto.
 - Contacto ya vive en `Contact.astro` (`#contacto`) con correo, LinkedIn y GitHub reales; el
   footer quedó separado y solo tiene enlaces de texto. Falta el número de WhatsApp: la constante
   `whatsappNumber` de `Contact.astro` está vacía y el botón no se renderiza hasta rellenarla.
 - Proyectos ya se renderizan desde `src/data/projects.ts` con `ProjectCard.astro` y enlaces
   reales (sin `#`). Faltan capturas/video reales, demos desplegadas, métricas de resultado y un
   repositorio público para EduCore; no inventar ninguno de esos datos.
+- Los chips de `#stack` y de la franja "STACK DIARIO" del Hero muestran logos monocromos de
+  `src/data/tech-icons.ts` (Simple Icons, CC0): heredan `currentColor` del chip y pasan a
+  `accent` en hover. `Microservicios`, `REST APIs` y `CI/CD` usan un ícono de etiqueta genérico
+  porque no son tecnologías con logo; `SQL Server` usa un cilindro de base de datos.
 - Experiencia y stack siguen inline en sus componentes; proyectos ya está en `src/data/`. La v2
   pide mover también esos datos a `src/data/*` (§10).
-- No hay `About`, sitemap, i18n, JSON-LD, OG image ni analítica.
+- No hay sitemap, i18n, JSON-LD, OG image ni analítica.
 
 ## Guía por fases
 
 Orden por dependencias. Las fases 2 y 3 son las de prioridad 🔴 en la spec y pueden adelantarse
 tras la fase 1.
 
-> Estado: **Fases 1, 2, 3 y 4 implementadas**. Fase 1: tokens, tipografía, contraste, foco,
+> Estado: **Fases 1, 2, 3, 4 y 5 implementadas**. Fase 1: tokens, tipografía, contraste, foco,
 > reduced motion y clases base. Fase 2: tarjeta de proyecto data-driven y enlaces reales; quedan
 > bloqueados capturas, demos y métricas reales. Fase 3: sección `#contacto` y footer separado;
 > queda pendiente el número real de WhatsApp. Fase 4: navegación con ids reales, menú móvil y
-> Hero rediseñado; `SOBRE MÍ` queda pendiente de `About.astro`. Lighthouse local: Accessibility
-> 100, Best Practices 100, SEO 100. Siguiente: fase 5.
+> Hero rediseñado. Fase 5: `About.astro` y línea de tiempo de experiencia; queda pendiente la
+> foto real. Lighthouse local: Accessibility 100, Best Practices 100, SEO 100. Siguiente: fase 6.
 
 ### Fase 1 — Base visual y accesibilidad (§1)
 
@@ -120,9 +130,13 @@ tras la fase 1.
   outline, franja "STACK DIARIO" con 6 chips. Usar `clamp()` y `overflow-wrap`.
 - Aceptación: a 1440×900 título, subtítulo y ambos botones visibles sin scroll; a 360px sin desborde.
 
-> Implementada. `Navbar.astro` usa `navItems` con `#experiencia`, `#stack`, `#proyectos` y
-> `#contacto`; el Hero es `#inicio`. Los eyebrows de las secciones ya coinciden con el menú.
-> `SOBRE MÍ` se añadirá cuando exista `About.astro` (Fase 5) para no dejar un anchor huérfano.
+> Implementada. `Navbar.astro` usa `navItems` con `#sobre-mi`, `#experiencia`, `#stack`,
+> `#proyectos` y `#contacto`; el Hero es `#inicio`. Los eyebrows de las secciones coinciden con
+> el menú. El navbar vuelve al layout original: logo `Soledad.dev` a la izquierda y, a la derecha,
+> los cinco enlaces + `DESCARGAR CV` en una sola fila (`justify-between`); por debajo de `lg` se
+> colapsa en el menú móvil. El `h1` del Hero va sin `max-w` y con
+> `clamp(2.25rem, 10.5vw, 9rem)` + `whitespace-nowrap` (285px de texto frente a 312px disponibles
+> a 360px), así que no desborda ni se descentra.
 
 ### Fase 5 — Sobre mí y Experiencia (§3–4)
 
@@ -131,6 +145,10 @@ tras la fase 1.
 - Experiencia: eyebrow `// EXPERIENCIA`, título `TRAYECTORIA PROFESIONAL`, hito "Ingeniería de
   Sistemas", chips y pills de fecha legibles; línea de tiempo sin scroll horizontal en móvil.
 - Aceptación: sin placeholders y sin texto <12px ni <4.5:1.
+
+> Implementada en `About.astro` + `Experience.astro`. Contraste verificado: chips 9.97:1, pills de
+> fecha 11.56:1. Queda pendiente únicamente la **foto real**: basta con dejar el archivo 4:5 en
+> `src/assets/about/` y se renderiza sola.
 
 ### Fase 6 — Stack (§5)
 

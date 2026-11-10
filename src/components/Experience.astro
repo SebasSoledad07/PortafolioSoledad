@@ -5,13 +5,15 @@ const experiences = [
     date: "2026",
     role: "FullStack Developer Freelance",
     company: "Soledad.dev (Proyecto Personal)",
+    current: true,
     description: "Desarrollo de aplicaciones web con tecnologías modernas y arquitectura de alto nivel.",
     highlights: ["Análisis de requisitos", "Diseño de base de datos", "Implementación de API REST", "Despliegue en la nube","Diseño de interfaces responsivas"]
   },
   {
     date: "2021 - 2026",
-    role: "Ingeniero de Sistemas en Formación",
+    role: "Ingeniería de Sistemas",
     company: "Universidad Francisco de Paula Santander",
+    current: false,
     description: "Desarrollo de sólidas bases en algoritmos, estructuras de datos y principios de ingeniería de software.",
     highlights: ["Java Enterprise", "Spring Boot", "Arquitectura Limpia"]
   }
@@ -26,19 +28,27 @@ const experiences = [
       <h3 class="text-4xl md:text-5xl font-black text-ink">Trayectoria <span class="text-accent">Profesional</span></h3>
     </div>
 
-    <div class="relative border-l border-line ml-4 md:ml-8 pl-8 space-y-12">
+    <div class="relative border-l border-line ml-2 md:ml-8 pl-6 md:pl-8 space-y-12">
       {experiences.map((exp) => (
         <div class="relative">
-          <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-bg border-2 border-accent shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+          <div
+            class:list={[
+              "absolute -left-[33px] top-1 h-4 w-4 rounded-full border-2 md:-left-[41px]",
+              exp.current
+                ? "border-accent bg-accent shadow-[0_0_12px_rgba(0,229,255,0.6)]"
+                : "border-accent/60 bg-bg",
+            ]}
+            aria-hidden="true"
+          ></div>
           
-          <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4">
+          <div class="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-4">
             <div>
               <h4 class="text-xl font-bold text-ink transition-colors">
                 {exp.role}
               </h4>
               <p class="text-accent font-mono text-sm">{exp.company}</p>
             </div>
-            <span class="font-mono text-xs text-ink-meta mt-2 md:mt-0 uppercase tracking-widest bg-surface-2 px-3 py-1">
+            <span class="inline-flex w-fit font-mono text-[13px] text-[#D8D8DE] uppercase tracking-widest bg-surface-2 px-3 py-1">
               {exp.date}
             </span>
           </div>

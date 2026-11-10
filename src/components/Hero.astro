@@ -1,4 +1,6 @@
 ---
+import { techIcons, conceptIcon } from "../data/tech-icons";
+
 const stack = [
   "Java",
   "Spring Boot",
@@ -14,7 +16,7 @@ const stack = [
   class="relative flex min-h-[100svh] items-center overflow-hidden bg-bg px-6 pb-16 pt-28"
 >
   <div class="container-page">
-    <div class="mx-auto max-w-4xl text-center">
+    <div class="text-center">
       <p
         class="inline-flex items-center gap-2 rounded-full border border-success/25 bg-success/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-ink-body"
       >
@@ -29,8 +31,8 @@ const stack = [
       </p>
 
       <h1
-        class="mt-8 font-black text-ink"
-        style="font-size: clamp(3rem, 12vw, 9.5rem); line-height: 0.88;"
+        class="mt-8 font-black whitespace-nowrap text-ink"
+        style="font-size: clamp(2.25rem, 10.5vw, 9rem); line-height: 0.88;"
       >
         Soledad<span class="text-accent">.dev</span>
       </h1>
@@ -59,12 +61,26 @@ const stack = [
         </a>
       </div>
 
-      <div class="mt-14 border-t border-line-soft pt-6">
+      <div class="mx-auto mt-14 max-w-3xl border-t border-line-soft pt-6">
         <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
           Stack diario
         </p>
         <ul class="mt-4 flex flex-wrap justify-center gap-2">
-          {stack.map((tech) => <li class="chip">{tech}</li>)}
+          {
+            stack.map((tech) => (
+              <li class="chip gap-2">
+                <svg
+                  class="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d={techIcons[tech] ?? conceptIcon} />
+                </svg>
+                {tech}
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>

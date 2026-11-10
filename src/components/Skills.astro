@@ -1,4 +1,6 @@
 ---
+import { techIcons, conceptIcon } from "../data/tech-icons";
+
 const skillCategories = [
   {
     title: "Core Backend",
@@ -62,7 +64,15 @@ const skillCategories = [
 
           <div class="flex flex-wrap gap-3">
             {category.skills.map((skill) => (
-              <span class="chip cursor-default hover:text-accent hover:border-accent/30 transition-all">
+              <span class="chip cursor-default gap-2 transition-all hover:border-accent/30 hover:text-accent">
+                <svg
+                  class="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d={techIcons[skill] ?? conceptIcon} />
+                </svg>
                 {skill}
               </span>
             ))}

@@ -1,5 +1,6 @@
 ---
 const navItems = [
+  { label: "Sobre mí", href: "#sobre-mi" },
   { label: "Experiencia", href: "#experiencia" },
   { label: "Stack", href: "#stack" },
   { label: "Proyectos", href: "#proyectos" },
@@ -16,63 +17,65 @@ const navItems = [
     <div class="flex h-16 items-center justify-between gap-4">
       <a
         href="/"
-        class="font-display text-lg font-black uppercase tracking-tight text-ink"
+        class="font-display text-lg font-black whitespace-nowrap uppercase tracking-tight text-ink"
       >
         Soledad<span class="text-accent">.dev</span>
       </a>
 
-      <ul class="hidden items-center gap-6 md:flex lg:gap-8">
-        {
-          navItems.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                data-nav-link
-                class="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
-              >
-                // {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="flex items-center gap-4 lg:gap-6">
+        <ul class="hidden items-center gap-6 lg:flex">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  data-nav-link
+                  class="inline-flex min-h-11 items-center font-mono text-xs whitespace-nowrap uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
+                >
+                  // {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
 
-      <a
-        href="/SEBASTIAN_SOLEDAD_CV.pdf"
-        class="btn btn-outline btn-card hidden md:inline-flex"
-      >
-        Descargar CV
-      </a>
-
-      <button
-        id="menu-toggle"
-        type="button"
-        class="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink-nav transition-colors hover:border-accent hover:text-accent md:hidden"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Abrir menú"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+        <a
+          href="/SEBASTIAN_SOLEDAD_CV.pdf"
+          class="btn btn-outline btn-card hidden px-4 lg:inline-flex"
         >
-          <path d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+          Descargar CV
+        </a>
+
+        <button
+          id="menu-toggle"
+          type="button"
+          class="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink-nav transition-colors hover:border-accent hover:text-accent lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Abrir menú"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <div
     id="mobile-menu"
-    class="hidden border-t border-line-soft bg-bg md:hidden"
+    class="hidden border-t border-line-soft bg-bg lg:hidden"
   >
     <div class="container-page py-4">
       <ul class="flex flex-col gap-1">
@@ -82,7 +85,7 @@ const navItems = [
               <a
                 href={item.href}
                 data-nav-link
-                class="flex min-h-11 items-center font-mono text-xs uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
+                class="flex min-h-11 items-center font-mono text-xs whitespace-nowrap uppercase tracking-widest text-ink-nav transition-colors hover:text-accent"
               >
                 // {item.label}
               </a>

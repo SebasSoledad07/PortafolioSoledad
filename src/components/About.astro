@@ -1,0 +1,89 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+/**
+ * Foto real: deja el archivo en `src/assets/about/` (4:5, WebP/AVIF).
+ * Se detecta automáticamente; si no existe, se muestra un monograma neutro.
+ */
+const photos = import.meta.glob<ImageMetadata>(
+  "../assets/about/*.{webp,avif,jpg,jpeg,png}",
+  { eager: true, import: "default" },
+);
+const photo = Object.values(photos)[0];
+
+const goals = ["Freelance", "Posición junior", "Remoto"];
+---
+
+<section id="sobre-mi" class="section relative">
+  <div class="container-page">
+    <div class="flex flex-col gap-12 md:flex-row md:items-start md:gap-14">
+      <div class="w-full max-w-[360px] shrink-0 self-center md:self-start">
+        <div class="rounded-lg border border-accent p-3">
+          <div class="aspect-[4/5] overflow-hidden rounded-md bg-surface-2">
+            {
+              photo ? (
+                <Image
+                  class="h-full w-full object-cover"
+                  src={photo}
+                  alt="Retrato de Sebastián Soledad"
+                  widths={[360, 480, 720]}
+                  sizes="(min-width: 768px) 360px, 90vw"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="relative grid h-full w-full place-items-center overflow-hidden">
+                  <div
+                    class="absolute inset-0 opacity-20"
+                    style="background-image: linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px); background-size: 28px 28px;"
+                    aria-hidden="true"
+                  >
+                  </div>
+                  <span
+                    class="font-display text-7xl font-black text-accent"
+                    aria-hidden="true">SS</span
+                  >
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1">
+        <p class="eyebrow">// Sobre mí</p>
+
+        <h2 class="mt-4 text-4xl font-black leading-[1.05] text-ink md:text-5xl">
+          De la base de datos <span class="text-accent">a la interfaz</span>
+        </h2>
+
+        <p class="mt-6 max-w-2xl text-base leading-relaxed text-ink-body">
+          Soy Sebastián Soledad, estudiante de Ingeniería de Sistemas en la
+          Universidad Francisco de Paula Santander, en Cúcuta, y desarrollador
+          FullStack. Disfruto construir aplicaciones completas —reservas,
+          alquileres y gestión académica— cuidando la arquitectura: APIs REST
+          desacopladas, bases de datos relacionales e interfaces claras.
+        </p>
+
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-ink-body">
+          Trabajo con arquitectura hexagonal para separar la lógica de negocio
+          de la infraestructura, y con Docker para llevar los proyectos a
+          producción. Ahora mismo desarrollo un sistema de reservas, una
+          plataforma de alquileres y una de gestión académica, de principio a
+          fin.
+        </p>
+
+        <div class="mt-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
+            Busco
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {goals.map((goal) => <li class="chip">{goal}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
