@@ -46,11 +46,9 @@ Al comparar el portafolio con `SEBASTIAN_SOLEDAD_CV.pdf` aparecieron inconsisten
 | 1 | Papelería POS | SAAS · PUNTO DE VENTA E INVENTARIO | 3 roles (Administrador, Bodeguero, Cajero), alertas de stock bajo, reportes exportables a Excel y PDF | `SebasSoledad07/Proyecto-Papeleria` |
 | 2 | NailTrack Pro | SAAS · RESERVAS | Spring Security con JWT, Angular 21, Docker, producción en Render / Railway | `SebasSoledad07/ReservasBackend` |
 | 3 | RentFlow Manager | PLATAFORMA · ALQUILERES | API RESTful desacoplada, pruebas de integración de extremo a extremo | `SebasSoledad07/GestionPropiedades` |
-| 4 | Alinata Bakery | SITIO WEB · REPOSTERÍA | Portada, presentación, creaciones, testimonios y contacto | `SebasSoledad07/Alinata-Landing` |
 
 - La línea "RESULTADO" con placeholder pasa a **"DESTACADO"** y usa datos reales del CV. Si más adelante tienes cifras medibles (usuarios, ventas procesadas, tiempos), reemplázalas.
-- "Código" apunta a los repos reales. Alinata ya tiene demo en `https://alinatabakery.netlify.app/`; para Papelería POS, NailTrack Pro y RentFlow Manager, enlaza los despliegues en Render / Railway o desactiva el botón si no hay demo.
-- Alinata Bakery se añadió con captura real, stack (Astro, Tailwind, TypeScript), repo y demo en Netlify.
+- "Código" apunta a los repos reales. "Demo en vivo" sigue pendiente: enlaza los despliegues en Render / Railway o desactiva el botón si no hay demo.
 - NailTrack: el repo enlazado es solo el backend; añade el del frontend o menciónalo en el README.
 
 ### Stack (reemplaza §5): cinco tarjetas, igual que las cinco categorías del CV
@@ -94,6 +92,43 @@ Si tienes credenciales verificables (Credly, Cisco, etc.), enlázalas desde cada
 3. Unificar idioma y nombres: "Real Estate Rental Platform" está en inglés y los demás proyectos en español. Usar el mismo nombre en CV y portafolio (por ejemplo "RentFlow Manager (Plataforma de alquileres)").
 4. Añadir EduCore al CV si lo mantienes en el portafolio.
 5. Añadir el enlace del PDF en el portafolio (`/SEBASTIAN_SOLEDAD_CV.pdf`) en el botón "Descargar CV".
+
+---
+
+## 0.2 Cuarto proyecto: Alinata Bakery (frontend, cliente real)
+
+Cubre la recomendación de tener un proyecto donde la interfaz sea la protagonista.
+
+| Campo | Valor |
+|---|---|
+| Nombre | Alinata Bakery |
+| Categoría | `FRONTEND · SITIO PARA CLIENTE REAL` |
+| Descripción | Sitio web para una pastelería: catálogo filtrable por categorías, testimonios y solicitud de cotización directa por WhatsApp. |
+| Destacado | Cliente real. Catálogo con filtros por categoría, formulario que envía la cotización por WhatsApp y diseño responsive. |
+| Stack | Astro + **[completar: Tailwind, TypeScript, etc.]** |
+| Demo / Repo | **[pendiente: pegar las URLs]** |
+
+### Filtro de proyectos
+- Botones `TODOS · 4`, `FULLSTACK · 3`, `FRONTEND · 1` encima de la cuadrícula, con `aria-pressed` y áreas táctiles de 44px.
+- En Astro basta un script pequeño (`data-kind` en cada tarjeta y `hidden` al filtrar). No hace falta un framework.
+- La cuadrícula de proyectos pasa a 2 columnas (`repeat(auto-fill, minmax(min(440px,100%),1fr))`), así 4 tarjetas forman un 2×2 y una sola tarjeta no se estira a todo el ancho.
+- Orden: Papelería POS, NailTrack Pro, RentFlow Manager, Alinata Bakery.
+
+### Imágenes
+- Recortes con marco de navegador (ver recomendaciones previas): el bloque superior (titular, foto y botones) para la tarjeta, y una fila de la cuadrícula de tortas como imagen secundaria.
+- WebP, menos de 150 KB, `alt` descriptivo.
+
+### Cliente real: puntos a cuidar
+1. **Permiso por escrito (un mensaje basta)** para mostrar la marca, la foto de la persona, el teléfono, la ubicación y las reseñas.
+2. **Reseñas:** si son reales, citarlas con permiso. Si son de ejemplo, no presentarlas como opiniones de clientes ni como resultados.
+3. **Una frase del cliente** sobre el trabajo ("Sebastián hizo mi sitio…") sería la mejor prueba social del portafolio.
+4. **Mejoras de calidad** que conviene hacer antes de enseñar la demo: títulos distintos en el catálogo (hay varios "Torta de Cumpleaños" idénticos), `loading="lazy"` en las imágenes y paginación o "Ver más".
+5. **Lighthouse:** medir la versión publicada y poner la puntuación real en "Destacado".
+
+### Cambios asociados
+- Trayectoria: el hito actual menciona "tres sistemas fullstack y un sitio frontend para un cliente real".
+- Stack: Astro añadido a la tarjeta Frontend & UI.
+- **CV:** añadir Alinata Bakery con las mismas tecnologías y la URL de la demo.
 
 ---
 
@@ -211,9 +246,7 @@ Todo enlace y botón con `min-height: 44px`.
 |---|---|
 | `// INICIO · // EXPERIENCIA · // HABILIDADES · // PROYECTOS` | `// SOBRE MÍ · // EXPERIENCIA · // STACK · // PROYECTOS · // CONTACTO` |
 | Botón `GET_CV` | Botón `DESCARGAR CV` |
-| — | Selector deslizante `ES` / `EN` (dos enlaces con `aria-current`) |
-
-El selector va después de `DESCARGAR CV` en escritorio y dentro del menú móvil. Es un control segmentado: el fondo accent se desplaza al idioma activo y los enlaces conservan `hreflang` y `aria-current="page"`; no usa `aria-pressed` porque navega entre rutas estáticas.
+| — | Selector `ES | EN` (botones con `aria-pressed`) |
 
 **Por qué:** los nombres del menú no coincidían con los títulos de sección ("Habilidades" vs "Technical Stack") y el CV tenía dos nombres distintos.
 **Cómo:** cada enlace apunta al `id` de su sección; `nav` con `aria-label="Principal"`; resaltar el enlace de la sección visible con `IntersectionObserver` (clase `text-accent`).
@@ -387,7 +420,7 @@ Página `/proyectos/[slug]` por proyecto: **Problema → Decisión técnica → 
 - Un solo `<h1>`; jerarquía h2 → h3 sin saltos.
 - Landmarks: `<header>`, `<nav>`, `<main>`, `<footer>`.
 - Enlace "Saltar al contenido" al inicio.
-- Foco visible, navegación completa por teclado, `aria-current="page"` en el selector de idioma.
+- Foco visible, navegación completa por teclado, `aria-pressed` en el selector de idioma.
 - `prefers-reduced-motion` respetado en hovers y videos.
 - Iconos decorativos con `aria-hidden="true"`.
 
@@ -456,7 +489,7 @@ Va **después de Proyectos y antes de Contacto**. Es secundaria: nunca debe comp
 **Tarjeta de equipo: FC Barcelona**
 - Banda decorativa superior de 84px con franjas verticales azul `#004D98` / granate `#A50044` (`repeating-linear-gradient`, `aria-hidden="true"`).
 - Etiqueta `FAVORITE_TEAM`, título `FC BARCELONA`, descripción de 1–2 líneas y chips (`Blaugrana`, `La Liga`, `Visca el Barça`).
-- **Escudo y camiseta:** se muestran por petición expresa del autor (escudo de Wikipedia y foto de producto de la tienda oficial, temporada 2026/27). Son marcas registradas: úsalos solo como referencia visual, sin sugerir afiliación. La tarjeta incluye una línea de información del club y la etiqueta `LOCAL 26/27`.
+- **No usar el escudo** (marca registrada); basta el nombre y los colores.
 - **Los colores del equipo solo se usan como decoración.** El granate sobre el fondo oscuro no pasa contraste para texto; todo el texto sigue en la paleta de §1.
 - Completar `[DESDE CUÁNDO LO SIGUES · TU JUGADOR O PARTIDO FAVORITO]`.
 
@@ -471,7 +504,7 @@ Va **después de Proyectos y antes de Contacto**. Es secundaria: nunca debe comp
 
 - Cada tarjeta: número mono (`#8A8A95`), chip de género en `accent`, título h3, descripción de 14px.
 - **Mejora recomendada:** sustituir la descripción genérica por **una frase tuya** ("por qué me enganchó"). Es lo que hace memorable la sección.
-- **Portadas:** cada tarjeta muestra la portada oficial de la serie (TVmaze) por petición expresa del autor. Son imágenes con derechos de sus titulares: si el sitio se monetiza, sustitúyelas por material propio o elimínalas.
+- No usar pósters oficiales sin licencia; si quieres imágenes, usa tus propios colores o tipografías.
 - Si usas Letterboxd o Trakt, enlazar el perfil con `target="_blank" rel="noopener noreferrer"`.
 
 **Franja Ahora mismo:** `VIENDO`, `LEYENDO`, `APRENDIENDO`. Actualizar con regularidad o eliminar la franja si no vas a mantenerla.
