@@ -26,13 +26,16 @@ npm.cmd run preview
 src/layout/Layout.astro        # <head>, fuentes, hreflang, fondo global, script .reveal (ojo: singular "layout")
 src/pages/index.astro           # portada ES; compone las secciones
 src/pages/en/index.astro        # portada EN; mismos componentes con lang="en"
-src/components/                 # Navbar, Hero, About, Experience, Skills, Projects, ProjectCard, Personal, Contact, Footer
+src/components/                 # Navbar, LanguageToggle, Hero, About, Experience, Skills, Projects, ProjectCard, Personal, Contact, Footer
 src/i18n/es.ts                  # todos los textos en español (fuente de verdad de `/`)
 src/i18n/en.ts                  # mismos claves en inglés (fuente de verdad de `/en/`)
 src/i18n/index.ts               # `Lang`, `dictionary`, `getCopy`, `homePath`
 src/data/projects.ts            # datos tipados de proyectos; textos como `LocalizedText`
 src/data/personal.ts            # equipo favorito y series de `#personal`
 src/data/tech-icons.ts          # rutas SVG (Simple Icons) de los logos del stack
+src/assets/about/               # foto de Sobre mí (una sola imagen en el nivel superior)
+src/assets/projects/            # capturas de proyectos; se importan desde `projects.ts`
+src/assets/personal/            # portadas de series y escudo/camiseta del Barça; se importan desde `personal.ts`
 src/styles/global.css           # tokens Tailwind v4 + base
 public/SEBASTIAN_SOLEDAD_CV.pdf # nombre real del CV
 docs/portafolio-specs.md        # especificación v2 (checklist en §11)
@@ -47,9 +50,10 @@ docs/portafolio-specs.md        # especificación v2 (checklist en §11)
   `getCopy(lang)`. Las páginas pasan el `lang` explícito a todos los hijos.
 - Las rutas son estáticas: `/` (ES) y `/en/` (EN). Los ids de sección siguen en español
   (`#sobre-mi`, `#experiencia`, `#stack`, `#proyectos`, `#personal`, `#contacto`) también en inglés.
-- El selector del navbar son enlaces `ES | EN` con `hreflang` y `aria-current="page"`
-  (no `aria-pressed`: es navegación, no un toggle). `Layout.astro` declara
-  `<link rel="alternate" hreflang>` es/en/x-default.
+- El selector es un control deslizante de dos enlaces `ES` / `EN` con `hreflang` y
+  `aria-current="page"` (no `aria-pressed`: es navegación, no un toggle). Va después de
+  `DESCARGAR CV` en escritorio y dentro del menú móvil, también después del CV. `Layout.astro`
+  declara `<link rel="alternate" hreflang>` es/en/x-default.
 - `projects.ts` guarda `category`, `description`, `highlight` e `imageAlt` como
   `Record<Lang, string>`; `personal.ts` hace lo mismo con `genre` y `description`. Si añades un
   proyecto o una serie, rellena ambos idiomas.
@@ -79,22 +83,29 @@ docs/portafolio-specs.md        # especificación v2 (checklist en §11)
   `#experiencia`, `#stack`, `#proyectos`, `#personal`, `#contacto`), menú móvil real con
   `aria-expanded` y resaltado por `IntersectionObserver`. El navbar tiene seis enlaces; en
   escritorio se muestran desde `xl` (1280px) porque a 1024px no caben junto al selector de idioma
-  y `DESCARGAR CV` (se comprobó desbordamiento de la fila).
+  y `DESCARGAR CV` (se comprobó desbordamiento de la fila). El selector deslizante va después de
+  `DESCARGAR CV` en escritorio y, en móvil, al final del menú desplegable.
 - `About.astro` (`#sobre-mi`) existe y está enlazado desde el menú. La foto real es
-  `src/assets/about/20250607_180110_872.jpg` (1920×1920, recortada a 4:5 por `object-cover`);
-  Astro genera WebP de 360/480/720. El glob del componente no es recursivo: las variantes
-  descartadas (p. ej. `foto sebas.png`, 1536×2730) viven en `src/assets/about/_unused/` y no se
-  renderizan. Deja una sola imagen en el nivel superior para evitar ambigüedad.
+  `src/assets/about/foto sebas.png` (1536×2730, recortada a 4:5 por `object-cover`); Astro
+  genera WebP de 360/480/720. El glob del componente no es recursivo: la variante cuadrada
+  descartada (`20250607_180110_872.jpg`, 1920×1920) vive en `src/assets/about/_unused/` y no se
+  renderiza. Deja una sola imagen en el nivel superior para evitar ambigüedad.
 - El segundo párrafo de About se redactó con datos reales del CV (arquitectura hexagonal, Docker,
   agentes de IA y los tres proyectos). Si el autor quiere contar su motivación personal, debe
   editar ese texto. El hero y Sobre mí usan «Ingeniero de Sistemas en formación» (§0.1).
 - Contacto ya vive en `Contact.astro` (`#contacto`) con correo, LinkedIn y GitHub reales; el
   footer quedó separado y solo tiene enlaces de texto. El botón de WhatsApp se renderiza porque
   `whatsappNumber` ya tiene el número real (`+573243106287`); si se vacía, desaparece solo.
-- Proyectos: `projects.ts` tiene Papelería POS (#1), NailTrack Pro y RentFlow Manager, alineados
-  con el CV y con repositorios reales. La línea «DESTACADO» usa el campo `highlight`. Siguen
-  pendientes capturas/video reales, demos desplegadas y métricas medibles; no inventarlas. EduCore
-  se quitó porque no está en el CV (§0.1).
+- Proyectos: `projects.ts` tiene Papelería POS (#1), NailTrack Pro, RentFlow Manager y Alinata
+  Bakery, con repositorios reales (Alinata con demo en Netlify). La línea «DESTACADO» usa el
+  campo `highlight`. Papelería POS tiene captura real en
+  `src/assets/projects/pos-papeleria/image.png` (1518×702), NailTrack Pro en
+  `src/assets/projects/nailtrack/image.png` (1496×688, landing del `ReservasFrontend`) y Alinata
+  en `src/assets/projects/alinata-bakery/image.png` (1490×686): Astro las convierte a WebP de
+  600/1200 px y las recorta a la franja de la tarjeta con `object-cover`. La cuadrícula es
+  `md:grid-cols-2` (2×2) para las cuatro tarjetas. Sigue pendiente la captura de RentFlow Manager,
+  las demos desplegadas de Papelería POS, NailTrack Pro y RentFlow Manager, y las métricas
+  medibles; no inventarlas. EduCore se quitó porque no está en el CV (§0.1).
 - Los chips de `#stack` y de la franja "STACK DIARIO" del Hero muestran logos monocromos de
   `src/data/tech-icons.ts` (Simple Icons, CC0): heredan `currentColor` del chip y pasan a
   `accent` en hover. `REST APIs` usa el ícono de etiqueta genérico; `Arquitectura Limpia`,
@@ -107,10 +118,13 @@ docs/portafolio-specs.md        # especificación v2 (checklist en §11)
 - `#experiencia` incluye el hito de educación con la pill `2021 — 2027 (EST.)` y el texto
   «Cursando», además del bloque `// CERTIFICACIONES` con cuatro tarjetas (AWS, CISCO, LACNIC,
   BIG SCHOOL).
-- `#personal` va después de Proyectos y antes de Contacto: tarjeta de FC Barcelona (sin escudo;
-  las franjas azul/granate son solo decoración) y cuatro series desde `src/data/personal.ts`. Se
-  omiten a propósito el párrafo introductorio, la nota «desde cuándo…» y la franja `AHORA_MISMO`
-  porque el autor aún no dio ese contenido; no inventarlo.
+- `#personal` va después de Proyectos y antes de Contacto: tarjeta de FC Barcelona con escudo,
+  camiseta local 26/27 y una línea de información, más cuatro series desde `src/data/personal.ts`
+  con su portada (las franjas azul/granate siguen siendo decoración). Las imágenes viven en
+  `src/assets/personal/` (`series/*.jpg`, `fcb/crest.png`, `fcb/kit-2627.jpg`). Se omiten a
+  propósito el párrafo introductorio, la nota «desde cuándo…» y la franja `AHORA_MISMO` porque el
+  autor aún no dio ese contenido; no inventarlo. Escudo y camiseta son marcas registradas y las
+  portadas tienen derechos de sus titulares: úsalos solo como referencia visual.
 - Experiencia y stack siguen inline en sus componentes; proyectos y personal ya están en
   `src/data/`. La v2 pide mover también esos datos a `src/data/*` (§10).
 - i18n ya funciona (`/` y `/en/`). Faltan sitemap, JSON-LD, OG image y analítica.
@@ -122,13 +136,15 @@ tras la fase 1.
 
 > Estado: **Fases 1–6 implementadas + i18n (parte de la fase 8) + §0.1/§10.1**. Fase 1: tokens,
 > tipografía, contraste, foco, reduced motion y clases base. Fase 2: tarjeta de proyecto
-> data-driven y enlaces reales; quedan bloqueados capturas, demos y métricas reales. Fase 3:
-> sección `#contacto` y footer separado, con WhatsApp real. Fase 4: navegación con ids reales,
+> data-driven, enlaces reales y capturas de Papelería POS, NailTrack Pro y Alinata Bakery; falta
+> la captura de RentFlow Manager, las demos de Papelería POS y NailTrack Pro y las métricas reales.
+> Fase 3: sección `#contacto` y footer separado, con WhatsApp real. Fase 4: navegación con ids reales,
 > menú móvil y Hero rediseñado. Fase 5: `About.astro` y línea de tiempo de experiencia, con foto
 > real. Fase 6: cinco tarjetas de stack con íconos propios. i18n ES/EN completo con selector en el
-> navbar. §0.1: proyectos, stack y certificaciones alineados con el CV. §10.1: sección
-> `#personal`. Lighthouse local: Accessibility 100, Best Practices 100, SEO 100. Siguiente: fase 7
-> (SEO/rendimiento/a11y) y lo que falte de la fase 8.
+> navbar. §0.1: proyectos del CV, stack y certificaciones alineados; Alinata Bakery se añadió
+> aparte. §10.1: sección `#personal` con escudo, camiseta y portadas. Lighthouse local:
+> Accessibility 100, Best Practices 100, SEO 100. Siguiente: fase 7 (SEO/rendimiento/a11y) y lo
+> que falte de la fase 8.
 
 ### Fase 1 — Base visual y accesibilidad (§1)
 
@@ -213,29 +229,34 @@ tras la fase 1.
 ### Fase 8 — Fase 2 del producto (§6.6, §9.5, §9.6)
 
 - Case studies `/proyectos/[slug]` con Problema → Decisión → Resultado → Aprendizajes.
-- i18n `/` + `/en/` con textos en `src/i18n/{es,en}.json` y selector `ES | EN` con `aria-pressed`.
+- i18n `/` + `/en/` con textos en `src/i18n/{es,en}.json` y selector deslizante `ES` / `EN`.
 - Analítica sin cookies (Plausible/Umami) y dominio con HTTPS.
 
 > i18n ya está hecho, con dos diferencias deliberadas frente a la spec: los diccionarios son
 > `src/i18n/{es,en}.ts` (tipados, no JSON) y el selector usa `aria-current="page"` porque son
-> enlaces de navegación estática, no un toggle. Faltan los case studies y la analítica.
+> enlaces de navegación estática, no un toggle. El indicador se desliza por CSS según el idioma
+> activo. Faltan los case studies y la analítica.
 
 ### Fase 9 — Alineación con el CV y «Fuera del código» (§0.1, §10.1)
 
 - Reemplazar el contenido por el del CV: «Ingeniero de Sistemas en formación», graduación
-  `2021 — 2027 (EST.)`, tres proyectos (Papelería POS, NailTrack Pro, RentFlow Manager), cinco
-  categorías de stack y cuatro certificaciones.
-- Añadir `#personal` después de Proyectos: FC Barcelona + cuatro series desde
-  `src/data/personal.ts`, sin escudo ni contenido inventado.
+  `2021 — 2027 (EST.)`, cuatro proyectos (Papelería POS, NailTrack Pro, RentFlow Manager y
+  Alinata Bakery), cinco categorías de stack y cuatro certificaciones.
+- Añadir `#personal` después de Proyectos: FC Barcelona (escudo, camiseta 26/27 e info) + cuatro
+  series con portada desde `src/data/personal.ts`, sin contenido inventado.
 
 > Implementada. Quedan vacíos deliberados hasta que el autor los complete: frase introductoria de
 > `#personal`, «desde cuándo sigo al Barça / jugador o partido favorito» y los valores de
-> `VIENDO / LEYENDO / APRENDIENDO` (franja `AHORA_MISMO` omitida). Las capturas, demos y métricas
-> de los proyectos siguen pendientes.
+> `VIENDO / LEYENDO / APRENDIENDO` (franja `AHORA_MISMO` omitida). De los proyectos, Papelería POS,
+> NailTrack Pro y Alinata ya tienen captura; falta la de RentFlow Manager, las demos de Papelería
+> POS y NailTrack Pro y las métricas.
 
 ## Reglas de contenido
 
 - No inventar métricas, fechas, clientes ni experiencia. Los `[CORCHETES]` de la spec son
   pendientes del autor.
 - Mantener el CV en `public/SEBASTIAN_SOLEDAD_CV.pdf` o actualizar todas las referencias a la vez.
+- Escudo y camiseta del Barça y portadas de series son material de terceros (marcas registradas y
+  derechos de sus titulares). Se usan como referencia visual por petición del autor; si el sitio
+  se monetiza, sustitúyelos por material propio o elimínalos.
 - Antes de publicar: cero `[...]`, cero enlaces `#`, demos y perfiles reales.

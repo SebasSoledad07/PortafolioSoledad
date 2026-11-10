@@ -1,5 +1,6 @@
 ---
 import { getCopy, homePath, type Lang } from "../i18n";
+import LanguageToggle from "./LanguageToggle.astro";
 
 interface Props {
   lang?: Lang;
@@ -40,44 +41,16 @@ const c = getCopy(lang).nav;
           }
         </ul>
 
-        <div
-          class="flex items-center font-mono text-xs uppercase tracking-widest"
-          role="group"
-          aria-label={c.language}
-        >
-          <a
-            href="/"
-            hreflang="es"
-            lang="es"
-            aria-current={lang === "es" ? "page" : undefined}
-            class:list={[
-              "inline-flex min-h-11 items-center px-1.5 transition-colors",
-              lang === "es" ? "text-accent" : "text-ink-nav hover:text-accent",
-            ]}
-          >
-            ES
-          </a>
-          <span class="px-1 text-line" aria-hidden="true">/</span>
-          <a
-            href="/en/"
-            hreflang="en"
-            lang="en"
-            aria-current={lang === "en" ? "page" : undefined}
-            class:list={[
-              "inline-flex min-h-11 items-center px-1.5 transition-colors",
-              lang === "en" ? "text-accent" : "text-ink-nav hover:text-accent",
-            ]}
-          >
-            EN
-          </a>
-        </div>
-
         <a
           href="/SEBASTIAN_SOLEDAD_CV.pdf"
           class="btn btn-outline btn-card hidden px-4 xl:inline-flex"
         >
           {c.cv}
         </a>
+
+        <div class="hidden xl:block">
+          <LanguageToggle lang={lang} />
+        </div>
 
         <button
           id="menu-toggle"
@@ -134,6 +107,9 @@ const c = getCopy(lang).nav;
           >
             {c.cv}
           </a>
+        </li>
+        <li class="mt-3 flex justify-center">
+          <LanguageToggle lang={lang} />
         </li>
       </ul>
     </div>

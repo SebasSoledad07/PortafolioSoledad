@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { favoriteTeam, series } from "../data/personal";
 import { getCopy, type Lang } from "../i18n";
 
@@ -22,20 +23,56 @@ const c = getCopy(lang).personal;
     </div>
 
     <div class="flex flex-wrap gap-6">
-      <article class="card group flex w-full flex-col overflow-hidden lg:w-[320px]">
-        <div
-          class="h-[84px] w-full shrink-0"
-          style="background-image: repeating-linear-gradient(90deg, #004d98 0 12px, #a50044 12px 24px);"
-          aria-hidden="true"
-        >
+      <article class="card group flex w-full flex-col overflow-hidden lg:w-[360px]">
+        <div class="relative h-[84px] w-full shrink-0">
+          <div
+            class="absolute inset-0"
+            style="background-image: repeating-linear-gradient(90deg, #004d98 0 12px, #a50044 12px 24px);"
+            aria-hidden="true"
+          >
+          </div>
+          <Image
+            class="absolute -bottom-7 left-6 h-16 w-16 rounded-lg border border-line bg-bg object-contain p-1.5"
+            src={favoriteTeam.crest}
+            alt={favoriteTeam.crestAlt[lang]}
+            widths={[64, 128]}
+            sizes="64px"
+            format="webp"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-        <div class="flex flex-1 flex-col p-6">
+        <div class="flex flex-1 flex-col p-6 pt-10">
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
             {c.teamLabel}
           </p>
           <h4 class="mt-3 text-2xl font-black uppercase text-ink transition-colors group-hover:text-accent">
             {favoriteTeam.name}
           </h4>
+
+          <div class="mt-4 flex items-start gap-4">
+            <p class="min-w-0 flex-1 text-sm leading-relaxed text-ink-body">
+              {favoriteTeam.info[lang]}
+            </p>
+            <figure class="w-[104px] shrink-0">
+              <div class="overflow-hidden rounded-md border border-line bg-white">
+                <Image
+                  class="h-auto w-full object-contain"
+                  src={favoriteTeam.kit}
+                  alt={favoriteTeam.kitAlt[lang]}
+                  widths={[104, 208]}
+                  sizes="104px"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption class="mt-1.5 text-center font-mono text-[11px] uppercase tracking-[0.15em] text-ink-meta">
+                {favoriteTeam.kitLabel[lang]}
+              </figcaption>
+            </figure>
+          </div>
+
           <ul class="mt-auto flex flex-wrap gap-2 pt-6">
             {favoriteTeam.chips.map((chip) => <li class="chip">{chip}</li>)}
           </ul>
@@ -49,19 +86,33 @@ const c = getCopy(lang).personal;
         <ul class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {
             series.map((item, index) => (
-              <li class="card flex flex-col p-5">
-                <div class="flex items-center justify-between gap-3">
-                  <span class="font-mono text-xs text-ink-meta">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span class="chip text-accent">{item.genre[lang]}</span>
+              <li class="card card-hover group flex gap-4 p-3">
+                <div class="aspect-[2/3] w-[88px] shrink-0 overflow-hidden rounded-md border border-line bg-surface-2">
+                  <Image
+                    class="h-full w-full object-cover"
+                    src={item.poster}
+                    alt={item.posterAlt[lang]}
+                    widths={[88, 176]}
+                    sizes="88px"
+                    format="webp"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-                <h5 class="mt-4 text-lg font-bold uppercase text-ink">
-                  {item.title}
-                </h5>
-                <p class="mt-2 text-sm leading-relaxed text-ink-body">
-                  {item.description[lang]}
-                </p>
+                <div class="flex min-w-0 flex-1 flex-col py-1">
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="font-mono text-xs text-ink-meta">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span class="chip text-accent">{item.genre[lang]}</span>
+                  </div>
+                  <h5 class="mt-3 text-base font-bold uppercase text-ink transition-colors group-hover:text-accent">
+                    {item.title}
+                  </h5>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-body">
+                    {item.description[lang]}
+                  </p>
+                </div>
               </li>
             ))
           }

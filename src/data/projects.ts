@@ -1,5 +1,8 @@
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../i18n";
+import alinataBakeryImage from "../assets/projects/alinata-bakery/image.png";
+import nailtrackImage from "../assets/projects/nailtrack/image.png";
+import posPapeleriaImage from "../assets/projects/pos-papeleria/image.png";
 
 /** Texto que existe en ambos idiomas del sitio. */
 export type LocalizedText = Record<Lang, string>;
@@ -16,7 +19,7 @@ export interface Project {
   demoUrl?: string;
   /** URL del repositorio público. Si no existe, no se renderiza el botón. */
   repoUrl?: string;
-  /** Captura real 1200×750 (WebP < 150 KB) importada desde src/assets. */
+  /** Captura real importada desde src/assets; Astro genera las variantes WebP (< 150 KB). */
   image?: ImageMetadata;
   imageAlt?: LocalizedText;
   /** Video del demo en MP4/WebM de 5–10 s; requiere poster para reduced motion. */
@@ -43,6 +46,11 @@ export const projects: Project[] = [
     },
     stack: ["Java", "Spring Boot", "PostgreSQL", "React", "TypeScript"],
     repoUrl: "https://github.com/SebasSoledad07/Proyecto-Papeleria",
+    image: posPapeleriaImage,
+    imageAlt: {
+      es: "Captura de la interfaz de Papelería POS",
+      en: "Screenshot of the Papelería POS interface",
+    },
   },
   {
     slug: "nailtrack-pro",
@@ -58,6 +66,11 @@ export const projects: Project[] = [
     },
     stack: ["Java", "Spring Boot", "Spring Security", "Angular", "Docker"],
     repoUrl: "https://github.com/SebasSoledad07/ReservasBackend",
+    image: nailtrackImage,
+    imageAlt: {
+      es: "Captura de la landing de NailTrack Pro con el panel de reservas",
+      en: "Screenshot of the NailTrack Pro landing page with the booking panel",
+    },
   },
   {
     slug: "rentflow-manager",
@@ -73,5 +86,22 @@ export const projects: Project[] = [
     },
     stack: ["Java", "Spring Boot", "PostgreSQL", "REST APIs"],
     repoUrl: "https://github.com/SebasSoledad07/GestionPropiedades",
+  },
+  {
+    slug: "alinata-bakery",
+    title: "Alinata Bakery",
+    category: { es: "Sitio web · Repostería", en: "Website · Bakery" },
+    description: {
+      es: "Landing page para una repostería artesanal: portada, presentación, creaciones, testimonios y contacto.",
+      en: "Landing page for an artisan bakery: hero, about, creations, testimonials and contact.",
+    },
+    stack: ["Astro", "Tailwind", "TypeScript"],
+    demoUrl: "https://alinatabakery.netlify.app/",
+    repoUrl: "https://github.com/SebasSoledad07/Alinata-Landing",
+    image: alinataBakeryImage,
+    imageAlt: {
+      es: "Captura de la página de inicio de Alinata Bakery",
+      en: "Screenshot of the Alinata Bakery homepage",
+    },
   },
 ];

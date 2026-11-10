@@ -60,7 +60,7 @@ const initials = title
           src={image}
           alt={imageAlt ?? `${c.imageAltPrefix} ${title}`}
           widths={[600, 1200]}
-          sizes="(min-width: 768px) 33vw, 100vw"
+          sizes="(min-width: 1280px) 600px, (min-width: 768px) 50vw, 100vw"
           format="webp"
           loading="lazy"
           decoding="async"
@@ -108,9 +108,15 @@ const initials = title
       )
     }
 
-    <div class="mt-5 flex flex-wrap gap-2">
-      {stack.map((tech) => <span class="chip">{tech}</span>)}
-    </div>
+    {
+      stack.length > 0 && (
+        <div class="mt-5 flex flex-wrap gap-2">
+          {stack.map((tech) => (
+            <span class="chip">{tech}</span>
+          ))}
+        </div>
+      )
+    }
 
     {
       (demoUrl || repoUrl) && (

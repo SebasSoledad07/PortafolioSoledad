@@ -1,0 +1,49 @@
+---
+import { getCopy, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const c = getCopy(lang).nav;
+const isSpanish = lang === "es";
+---
+
+<div
+  class="relative grid grid-cols-2 items-center rounded border border-line bg-surface-2/80 p-1 font-mono text-xs font-bold uppercase tracking-widest"
+  role="group"
+  aria-label={c.language}
+>
+  <span
+    class:list={[
+      "pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-[3px] bg-accent shadow-[0_0_12px_rgba(0,229,255,0.3)] transition-transform duration-300 ease-out",
+      !isSpanish && "translate-x-full",
+    ]}
+    aria-hidden="true"
+  ></span>
+  <a
+    href="/"
+    hreflang="es"
+    lang="es"
+    aria-current={isSpanish ? "page" : undefined}
+    class:list={[
+      "relative z-10 inline-flex min-h-9 items-center justify-center rounded-[3px] px-3 transition-colors",
+      isSpanish ? "text-accent-ink" : "text-ink-nav hover:text-accent",
+    ]}
+  >
+    ES
+  </a>
+  <a
+    href="/en/"
+    hreflang="en"
+    lang="en"
+    aria-current={!isSpanish ? "page" : undefined}
+    class:list={[
+      "relative z-10 inline-flex min-h-9 items-center justify-center rounded-[3px] px-3 transition-colors",
+      !isSpanish ? "text-accent-ink" : "text-ink-nav hover:text-accent",
+    ]}
+  >
+    EN
+  </a>
+</div>
