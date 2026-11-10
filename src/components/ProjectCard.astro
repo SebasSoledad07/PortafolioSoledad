@@ -1,26 +1,22 @@
 ---
 import { Image } from "astro:assets";
 import type { Project } from "../data/projects";
+import { getCopy, type Lang } from "../i18n";
 
 interface Props {
   project: Project;
+  lang?: Lang;
 }
 
-const { project } = Astro.props;
-const {
-  title,
-  category,
-  description,
-  result,
-  stack,
-  demoUrl,
-  repoUrl,
-  image,
-  imageAlt,
-  video,
-  videoType,
-  poster,
-} = project;
+const { project, lang = "es" } = Astro.props;
+const c = getCopy(lang).projects.card;
+
+const { title, stack, demoUrl, repoUrl, image, video, videoType, poster } =
+  project;
+const category = project.category[lang];
+const description = project.description[lang];
+const result = project.highlight?.[lang];
+const imageAlt = project.imageAlt?.[lang];
 
 const initials = title
   .split(" ")
@@ -39,7 +35,7 @@ const initials = title
       <span class="h-2 w-2 rounded-full bg-line"></span>
       <span class="h-2 w-2 rounded-full bg-line"></span>
       <span class="ml-2 font-mono text-xs uppercase tracking-widest text-ink-meta">
-        Vista previa
+        {c.preview}
       </span>
     </div>
 
@@ -53,7 +49,7 @@ const initials = title
           playsinline
           preload="metadata"
           poster={poster?.src}
-          aria-label={`Demo de ${title}`}
+          aria-label={`${c.videoAltPrefix} ${title}`}
           data-reduced-motion
         >
           <source src={video} type={videoType ?? "video/mp4"} />
@@ -62,7 +58,7 @@ const initials = title
         <Image
           class="h-[calc(100%-41px)] w-full object-cover"
           src={image}
-          alt={imageAlt ?? `Interfaz de ${title}`}
+          alt={imageAlt ?? `${c.imageAltPrefix} ${title}`}
           widths={[600, 1200]}
           sizes="(min-width: 768px) 33vw, 100vw"
           format="webp"
@@ -82,7 +78,7 @@ const initials = title
               {initials}
             </span>
             <span class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
-              Interfaz del proyecto
+              {c.placeholder}
             </span>
           </div>
         </div>
@@ -105,7 +101,7 @@ const initials = title
       result && (
         <p class="mt-4 border-t border-dashed border-line pt-3 text-sm text-ink-meta">
           <span class="font-mono text-xs font-bold uppercase tracking-widest text-accent">
-            Resultado
+            {c.highlight}
           </span>{" "}
           · {result}
         </p>
@@ -126,7 +122,7 @@ const initials = title
               target="_blank"
               rel="noopener noreferrer"
             >
-              Demo en vivo ↗
+              {c.demo}
             </a>
           )}
           {repoUrl && (
@@ -136,7 +132,7 @@ const initials = title
               target="_blank"
               rel="noopener noreferrer"
             >
-              Código
+              {c.code}
             </a>
           )}
         </div>

@@ -1,5 +1,13 @@
 ---
 import { techIcons, conceptIcon } from "../data/tech-icons";
+import { getCopy, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const c = getCopy(lang).hero;
 
 const stack = [
   "Java",
@@ -27,7 +35,7 @@ const stack = [
           <span class="relative inline-flex h-2 w-2 rounded-full bg-success"
           ></span>
         </span>
-        Disponible para proyectos · Cúcuta, COL
+        {c.availability}
       </p>
 
       <h1
@@ -40,30 +48,28 @@ const stack = [
       <p
         class="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ink-body md:text-lg"
       >
-        Ingeniero de sistemas que construye aplicaciones
-        <strong class="font-semibold text-ink"
-          >fullstack con Java, Spring Boot y React</strong
-        >: reservas, alquileres y gestión académica, de la base de datos a la
-        interfaz.
+        {c.subtitlePre}<strong class="font-semibold text-ink"
+          >{c.subtitleStrong}</strong
+        >{c.subtitlePost}
       </p>
 
       <div
         class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
       >
         <a href="#proyectos" class="btn btn-primary w-full sm:w-auto">
-          Ver proyectos ↗
+          {c.primaryCta}
         </a>
         <a
           href="/SEBASTIAN_SOLEDAD_CV.pdf"
           class="btn btn-outline w-full sm:w-auto"
         >
-          Descargar CV
+          {c.cvCta}
         </a>
       </div>
 
       <div class="mx-auto mt-14 max-w-3xl border-t border-line-soft pt-6">
         <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-meta">
-          Stack diario
+          {c.stackLabel}
         </p>
         <ul class="mt-4 flex flex-wrap justify-center gap-2">
           {

@@ -5,20 +5,23 @@ import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Experience from '../components/Experience.astro';
 import Projects from '../components/Projects.astro';
+import Personal from '../components/Personal.astro';
 import Skills from '../components/Skills.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { es } from '../i18n/es';
 ---
 
-<Layout title="Soledad.dev | FullStack & Architecture">
-	<Navbar />
+<Layout title={es.meta.title} description={es.meta.description} lang="es">
+	<Navbar lang="es" />
 	<main>
-		<Hero />
-		<About />
-		<Experience />
-		<Skills />
-		<Projects />
-		<Contact />
+		<Hero lang="es" />
+		<About lang="es" />
+		<Experience lang="es" />
+		<Skills lang="es" />
+		<Projects lang="es" />
+		<Personal lang="es" />
+		<Contact lang="es" />
 	</main>
-	<Footer />
+	<Footer lang="es" />
 </Layout>

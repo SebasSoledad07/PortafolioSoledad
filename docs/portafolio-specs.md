@@ -21,6 +21,80 @@ Cada cambio indica **qué**, **por qué**, **cómo** y **criterio de aceptación
 
 ---
 
+## 0.1 Alineación con la hoja de vida (prevalece sobre §4, §5 y §6)
+
+Al comparar el portafolio con `SEBASTIAN_SOLEDAD_CV.pdf` aparecieron inconsistencias. Un reclutador va a contrastar ambos documentos, así que deben decir lo mismo.
+
+### Inconsistencias detectadas y decisión
+
+| Tema | Portafolio (antes) | CV | Decisión |
+|---|---|---|---|
+| Graduación | Trayectoria "2021 – 2026" | Graduación estimada **dic. 2027**, cursando | Pill `2021 — 2027 (EST.)` y texto "Cursando". Confirmar el año de inicio. |
+| Título profesional | "Ingeniero de Sistemas" | "Ingeniero de Sistemas **en formación**" | Usar "en formación" en hero y Sobre mí. |
+| Proyecto POS | No aparecía | **Papelería POS**: el más completo del CV | Pasa a ser el proyecto #1. |
+| EduCore System | Aparecía | No está en el CV | Quitarlo del portafolio, o añadirlo al CV si es real y presentable. |
+| Base de datos de RentFlow | MySQL | PostgreSQL | Usar PostgreSQL (verificar en el repo). |
+| Stack | SQL Server, Redis, Microservicios, Cloud Run, CI/CD, Astro | Python, Django, Spring Security, TypeScript, JavaScript, Render, Railway, GCP, Supabase, MySQL | Mostrar solo lo que está en el CV y que puedas defender en entrevista. |
+| Certificaciones | Ninguna | 4 certificaciones | Nuevo bloque en Experiencia. |
+| Agentes de IA | No se mencionaba | Parte central del resumen del CV | Aparece en hero, Sobre mí, trayectoria y stack. |
+| Rol "Freelance" | "Fullstack Developer Freelance" | Rol "FullStack Developer" en proyectos, sin clientes | Renombrado a "Fullstack Developer · Proyectos propios". No afirmar clientes si no los hay. |
+
+### Contenido de proyectos (reemplaza §6.2)
+
+| # | Proyecto | Categoría | Destacado (sale del CV) | Repo |
+|---|---|---|---|---|
+| 1 | Papelería POS | SAAS · PUNTO DE VENTA E INVENTARIO | 3 roles (Administrador, Bodeguero, Cajero), alertas de stock bajo, reportes exportables a Excel y PDF | `SebasSoledad07/Proyecto-Papeleria` |
+| 2 | NailTrack Pro | SAAS · RESERVAS | Spring Security con JWT, Angular 21, Docker, producción en Render / Railway | `SebasSoledad07/ReservasBackend` |
+| 3 | RentFlow Manager | PLATAFORMA · ALQUILERES | API RESTful desacoplada, pruebas de integración de extremo a extremo | `SebasSoledad07/GestionPropiedades` |
+
+- La línea "RESULTADO" con placeholder pasa a **"DESTACADO"** y usa datos reales del CV. Si más adelante tienes cifras medibles (usuarios, ventas procesadas, tiempos), reemplázalas.
+- "Código" apunta a los repos reales. "Demo en vivo" sigue pendiente: enlaza los despliegues en Render / Railway o desactiva el botón si no hay demo.
+- NailTrack: el repo enlazado es solo el backend; añade el del frontend o menciónalo en el README.
+
+### Stack (reemplaza §5): cinco tarjetas, igual que las cinco categorías del CV
+
+| Tarjeta | Tecnologías |
+|---|---|
+| Core Backend | Java, Spring Boot, Spring Security, Python, Django, REST APIs |
+| Frontend & UI | Angular, React, TypeScript, JavaScript, Tailwind CSS, HTML5 / CSS3 |
+| Data Strategy | PostgreSQL, MySQL, Supabase |
+| DevOps & Cloud | Docker, Render, Railway, GCP, Git / GitHub |
+| Metodología & IA | Arquitectura Limpia, Agentes de IA, Pruebas, Depuración |
+
+La quinta tarjeta ocupa todo el ancho. Icono: terminal.
+
+### Trayectoria y certificaciones (amplía §4)
+
+- Hito actual: **Fullstack Developer · Soledad.dev, proyectos propios** (Spring Security (JWT), Docker, Render / Railway, pruebas y depuración, agentes de IA).
+- Hito de educación: UFPS, "Cursando", graduación estimada dic. 2027.
+- Bloque nuevo `// CERTIFICACIONES` con 4 tarjetas (emisor, año, título):
+
+| Emisor | Año | Título |
+|---|---|---|
+| AWS | 2024 | AWS Academy Cloud Operations |
+| CISCO | 2024 – 2025 | Networking Basic & Operating Systems Basic |
+| LACNIC | 2025 | Introducción a Gestión de Redes e IPv6 Básico |
+| BIG SCHOOL | 2026 | Desarrollo con IA: Programa con Agentes |
+
+Si tienes credenciales verificables (Credly, Cisco, etc.), enlázalas desde cada tarjeta.
+
+### Contacto
+
+- Correo: `soledadsebastian07@gmail.com`. Usar el mismo en CV y portafolio.
+- WhatsApp: `https://wa.me/573243106287`.
+- LinkedIn: `linkedin.com/in/sebastiansoledad`. GitHub: `github.com/SebasSoledad07`.
+- **Privacidad:** publicar el teléfono (incluso dentro del enlace de WhatsApp) atrae spam. Si prefieres evitarlo, deja solo correo y LinkedIn.
+
+### Cambios sugeridos en el CV (para que ambos casen)
+
+1. Añadir la URL del portafolio (`soledad.dev` o la que uses) junto a GitHub y LinkedIn.
+2. Página 2: hay una viñeta vacía al inicio y falta el acento en "Monitoree" (→ "Monitoreé").
+3. Unificar idioma y nombres: "Real Estate Rental Platform" está en inglés y los demás proyectos en español. Usar el mismo nombre en CV y portafolio (por ejemplo "RentFlow Manager (Plataforma de alquileres)").
+4. Añadir EduCore al CV si lo mantienes en el portafolio.
+5. Añadir el enlace del PDF en el portafolio (`/SEBASTIAN_SOLEDAD_CV.pdf`) en el botón "Descargar CV".
+
+---
+
 ## 1. Design tokens
 
 ### 1.1 Colores
@@ -365,6 +439,45 @@ public/
 
 ---
 
+## 10.1 Nueva sección: Fuera del código (`#personal`)
+
+Va **después de Proyectos y antes de Contacto**. Es secundaria: nunca debe competir con el hero ni con los proyectos.
+
+**Estructura**
+- Eyebrow `// FUERA_DEL_CÓDIGO`; h2 `MÁS ALLÁ DEL CÓDIGO` ("CÓDIGO" en `accent`).
+- Párrafo introductorio (máx. 2 líneas, tono cercano). Reemplazar `[TU FRASE PERSONAL]`.
+- Fila de dos bloques (`flex-wrap`, apilan en móvil): tarjeta del equipo + cuadrícula de series.
+- Franja inferior `AHORA_MISMO` con borde punteado.
+
+**Tarjeta de equipo: FC Barcelona**
+- Banda decorativa superior de 84px con franjas verticales azul `#004D98` / granate `#A50044` (`repeating-linear-gradient`, `aria-hidden="true"`).
+- Etiqueta `FAVORITE_TEAM`, título `FC BARCELONA`, descripción de 1–2 líneas y chips (`Blaugrana`, `La Liga`, `Visca el Barça`).
+- **No usar el escudo** (marca registrada); basta el nombre y los colores.
+- **Los colores del equipo solo se usan como decoración.** El granate sobre el fondo oscuro no pasa contraste para texto; todo el texto sigue en la paleta de §1.
+- Completar `[DESDE CUÁNDO LO SIGUES · TU JUGADOR O PARTIDO FAVORITO]`.
+
+**Series vistas** (4 tarjetas, `flex: 1 1 240px`)
+
+| # | Título | Género | Descripción |
+|---|---|---|---|
+| 01 | El Mentalista | POLICIAL | Un consultor que resuelve crímenes leyendo a las personas. |
+| 02 | Lucifer | FANTASÍA | El diablo, retirado en Los Ángeles, colabora con la policía. |
+| 03 | Suits | DRAMA LEGAL | Abogados de Nueva York: ingenio, estrategia y ambición. |
+| 04 | Breaking Bad | DRAMA CRIMINAL | Un profesor de química y su caída en el mundo criminal. |
+
+- Cada tarjeta: número mono (`#8A8A95`), chip de género en `accent`, título h3, descripción de 14px.
+- **Mejora recomendada:** sustituir la descripción genérica por **una frase tuya** ("por qué me enganchó"). Es lo que hace memorable la sección.
+- No usar pósters oficiales sin licencia; si quieres imágenes, usa tus propios colores o tipografías.
+- Si usas Letterboxd o Trakt, enlazar el perfil con `target="_blank" rel="noopener noreferrer"`.
+
+**Franja Ahora mismo:** `VIENDO`, `LEYENDO`, `APRENDIENDO`. Actualizar con regularidad o eliminar la franja si no vas a mantenerla.
+
+**Datos en Astro:** guardar series y equipo en `src/data/personal.ts` y renderizar con un `.map()`, igual que `projects.ts`.
+
+**Aceptación:** sin placeholders `[...]` al publicar; contraste ≥ 4.5:1 en todo el texto; en 360px las tarjetas apilan sin scroll horizontal.
+
+---
+
 ## 11. Checklist de entrega
 
 - [ ] Paleta y contrastes aplicados (§1); ningún texto bajo 4.5:1.
@@ -376,6 +489,7 @@ public/
 - [ ] Íconos semánticos en el stack.
 - [ ] 3 proyectos con captura/video, demo en vivo, código, resultado real.
 - [ ] README cuidado en los 3 repositorios y fijados en GitHub.
+- [ ] Sección "Fuera del código" con equipo, series y frase propia (§10.1).
 - [ ] Sección de contacto con correo, WhatsApp y LinkedIn funcionando.
 - [ ] Hovers, foco visible, `prefers-reduced-motion`.
 - [ ] Meta/OG/JSON-LD/sitemap.

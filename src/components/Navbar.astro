@@ -1,31 +1,32 @@
 ---
-const navItems = [
-  { label: "Sobre mí", href: "#sobre-mi" },
-  { label: "Experiencia", href: "#experiencia" },
-  { label: "Stack", href: "#stack" },
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Contacto", href: "#contacto" },
-];
+import { getCopy, homePath, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const c = getCopy(lang).nav;
 ---
 
 <nav
   id="main-nav"
-  aria-label="Principal"
+  aria-label={c.aria}
   class="fixed top-0 z-50 w-full border-b border-line-soft bg-bg/80 backdrop-blur-md transition-shadow duration-300"
 >
   <div class="container-page">
     <div class="flex h-16 items-center justify-between gap-4">
       <a
-        href="/"
+        href={homePath(lang)}
         class="font-display text-lg font-black whitespace-nowrap uppercase tracking-tight text-ink"
       >
         Soledad<span class="text-accent">.dev</span>
       </a>
 
-      <div class="flex items-center gap-4 lg:gap-6">
-        <ul class="hidden items-center gap-6 lg:flex">
+      <div class="flex items-center gap-3 xl:gap-4">
+        <ul class="hidden items-center gap-4 xl:flex 2xl:gap-5">
           {
-            navItems.map((item) => (
+            c.items.map((item) => (
               <li>
                 <a
                   href={item.href}
@@ -39,20 +40,54 @@ const navItems = [
           }
         </ul>
 
+        <div
+          class="flex items-center font-mono text-xs uppercase tracking-widest"
+          role="group"
+          aria-label={c.language}
+        >
+          <a
+            href="/"
+            hreflang="es"
+            lang="es"
+            aria-current={lang === "es" ? "page" : undefined}
+            class:list={[
+              "inline-flex min-h-11 items-center px-1.5 transition-colors",
+              lang === "es" ? "text-accent" : "text-ink-nav hover:text-accent",
+            ]}
+          >
+            ES
+          </a>
+          <span class="px-1 text-line" aria-hidden="true">/</span>
+          <a
+            href="/en/"
+            hreflang="en"
+            lang="en"
+            aria-current={lang === "en" ? "page" : undefined}
+            class:list={[
+              "inline-flex min-h-11 items-center px-1.5 transition-colors",
+              lang === "en" ? "text-accent" : "text-ink-nav hover:text-accent",
+            ]}
+          >
+            EN
+          </a>
+        </div>
+
         <a
           href="/SEBASTIAN_SOLEDAD_CV.pdf"
-          class="btn btn-outline btn-card hidden px-4 lg:inline-flex"
+          class="btn btn-outline btn-card hidden px-4 xl:inline-flex"
         >
-          Descargar CV
+          {c.cv}
         </a>
 
         <button
           id="menu-toggle"
           type="button"
-          class="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink-nav transition-colors hover:border-accent hover:text-accent lg:hidden"
+          class="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink-nav transition-colors hover:border-accent hover:text-accent xl:hidden"
           aria-expanded="false"
           aria-controls="mobile-menu"
-          aria-label="Abrir menú"
+          aria-label={c.menuOpen}
+          data-open-label={c.menuOpen}
+          data-close-label={c.menuClose}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,12 +110,12 @@ const navItems = [
 
   <div
     id="mobile-menu"
-    class="hidden border-t border-line-soft bg-bg lg:hidden"
+    class="hidden border-t border-line-soft bg-bg xl:hidden"
   >
     <div class="container-page py-4">
       <ul class="flex flex-col gap-1">
         {
-          navItems.map((item) => (
+          c.items.map((item) => (
             <li>
               <a
                 href={item.href}
@@ -97,7 +132,7 @@ const navItems = [
             href="/SEBASTIAN_SOLEDAD_CV.pdf"
             class="btn btn-outline btn-card w-full"
           >
-            Descargar CV
+            {c.cv}
           </a>
         </li>
       </ul>
@@ -110,10 +145,13 @@ const navItems = [
   const toggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
 
+  const openLabel = toggle?.dataset.openLabel ?? "Abrir menú";
+  const closeLabel = toggle?.dataset.closeLabel ?? "Cerrar menú";
+
   const setMenu = (open: boolean) => {
     if (!toggle || !mobileMenu) return;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    toggle.setAttribute("aria-label", open ? closeLabel : openLabel);
     mobileMenu.classList.toggle("hidden", !open);
   };
 

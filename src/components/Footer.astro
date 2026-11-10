@@ -1,4 +1,13 @@
 ---
+import { getCopy, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const c = getCopy(lang).footer;
+
 const currentYear = new Date().getFullYear();
 
 const socials = [
@@ -41,13 +50,13 @@ const socials = [
           <p
             class="font-mono text-xs uppercase tracking-widest text-ink-nav"
           >
-            Operational // Cúcuta, COL
+            {c.status}
           </p>
         </div>
       </div>
 
       <nav
-        aria-label="Redes sociales"
+        aria-label={c.socialLabel}
         class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1"
       >
         {
@@ -69,7 +78,7 @@ const socials = [
           &copy; {currentYear} Sebastian Soledad
         </p>
         <p class="mt-1 font-mono text-xs text-ink-nav">
-          Hecho con Astro + Tailwind CSS
+          {c.madeWith}
         </p>
       </div>
     </div>

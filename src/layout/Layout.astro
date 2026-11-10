@@ -1,19 +1,19 @@
 ---
+import type { Lang } from "../i18n";
+
 interface Props {
 	title: string;
-	description?: string;
+	description: string;
+	lang?: Lang;
 }
 
-const { 
-	title, 
-	description = "Portafolio profesional de Sebastian Soledad - Ingeniero de Sistemas especializado en Arquitectura de Software y FullStack Development." 
-} = Astro.props;
+const { title, description, lang = "es" } = Astro.props;
 
 import '../styles/global.css';
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -23,6 +23,9 @@ import '../styles/global.css';
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+		<link rel="alternate" hreflang="es" href="/" />
+		<link rel="alternate" hreflang="en" href="/en/" />
+		<link rel="alternate" hreflang="x-default" href="/" />
 		
 <title>{title}</title>
 	</head>

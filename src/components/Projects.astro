@@ -1,19 +1,27 @@
 ---
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard.astro";
+import { getCopy, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const c = getCopy(lang).projects;
 ---
 
 <section id="proyectos" class="section bg-bg">
   <div class="container-page">
     
     <div class="mb-12 md:mb-16 text-center md:text-left">
-      <h2 class="font-mono text-accent text-xs uppercase tracking-[0.4em] mb-2">// Proyectos</h2>
-      <h3 class="text-3xl md:text-5xl font-black text-ink">Proyectos <span class="text-accent">Destacados</span></h3>
+      <h2 class="font-mono text-accent text-xs uppercase tracking-[0.4em] mb-2">{c.eyebrow}</h2>
+      <h3 class="text-3xl md:text-5xl font-black text-ink">{c.titleLead}<span class="text-accent">{c.titleAccent}</span></h3>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {projects.map((project) => (
-        <ProjectCard project={project} />
+        <ProjectCard project={project} lang={lang} />
       ))}
     </div>
   </div>
